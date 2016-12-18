@@ -1,0 +1,46 @@
+package exit.services.json;
+
+import exit.services.excepciones.ExceptionAnioInvalido;
+import exit.services.excepciones.ExceptionEstadoInvalido;
+import exit.services.excepciones.ExceptionFormatoFecha;
+import exit.services.excepciones.ExceptionIDNoNumerico;
+import exit.services.excepciones.ExceptionIDNullIncidente;
+import exit.services.excepciones.ExceptionLongitud;
+import exit.services.excepciones.ExceptionModoContactoInvalido;
+import exit.services.excepciones.ExceptionTipoIncidenteInvalido;
+
+public class JsonRestContacto implements IJsonRestEstructura{
+
+	@Override
+	public JSONHandler createJson(TipoTarea tarea)
+			throws ExceptionLongitud, ExceptionEstadoInvalido, ExceptionTipoIncidenteInvalido, ExceptionIDNullIncidente,
+			ExceptionModoContactoInvalido, ExceptionIDNoNumerico, ExceptionFormatoFecha, ExceptionAnioInvalido {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void agregarCampo(String cabecera, String valor) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public String getPathError() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getLine() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setLine(String line) {
+		// TODO Auto-generated method stub
+		
+	}
+
+}

@@ -1,0 +1,8 @@
+package aa.bb;
+
+public abstract class ClaseA {
+	
+	public void String a(){
+		System.out.println("a");
+	}
+}

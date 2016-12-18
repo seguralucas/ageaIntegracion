@@ -1,0 +1,30 @@
+package aa.bb;
+import exit.services.fileHandler.ConvertidosJSONCSV;
+import exit.services.json.IJsonRestEstructura;
+import exit.services.json.JsonRestIncidentes;
+
+public class TestConvertidosJSONCSV extends ConvertidosJSONCSV{
+
+	@Override
+	public IJsonRestEstructura crearJson(String valoresCsv, String cabeceras) {
+		   JsonRestIncidentes jsonEstructura= new JsonRestIncidentes("error.txt");
+	   		//jsonEstructura.setLine(line);
+	   			switch (cabeceras) {
+	   				
+					case "ID": jsonEstructura.setId(valoresCsv); break;				
+	   				case "NRO_SAC": jsonEstructura.setNro_sac(valoresCsv); break;				
+	   				case "MODO_CONTACTO": jsonEstructura.setModo_contacto(valoresCsv); break;				
+	   				case "CAUSA": jsonEstructura.setCausa(valoresCsv); break;				
+	   				case "PRODUCTO": jsonEstructura.setProducto(valoresCsv); break;				
+	   				case "MOTIVO": jsonEstructura.setMotivo(valoresCsv); break;				
+	   				case "ESTADO": jsonEstructura.setEstado(valoresCsv); break;				
+	   				case "SECTOR_RESPONSABLE": jsonEstructura.setSector_responsable(valoresCsv); break;				
+	   				case "HILO1": jsonEstructura.setHilo1(valoresCsv); sb.append(valoresCsv); break;				
+	   				case "HILO2": jsonEstructura.setHilo2(valoresCsv); sb.append(valoresCsv); break;				
+	   				case "ANIO": jsonEstructura.setAnio(valoresCsv); break;				
+				}
+
+	   		return jsonEstructura;
+ }
+
+}

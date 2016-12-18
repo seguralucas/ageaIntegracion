@@ -1,0 +1,22 @@
+package exit.services.excepciones;
+
+public abstract class ExceptionBiactiva extends Exception {
+	public String ficheroErrorExcepcion;
+	
+	public ExceptionBiactiva(String fichero) {
+		this.setFicheroErrorExcepcion(fichero);
+	}
+	public ExceptionBiactiva(String fichero, String mensaje) {
+		this.setFicheroErrorExcepcion(fichero);
+	}
+	
+	public String getFicheroErrorExcepcion() {
+		return ficheroErrorExcepcion;
+	}
+
+	public void setFicheroErrorExcepcion(String ficheroErrorExcepcion) {
+		this.ficheroErrorExcepcion = ficheroErrorExcepcion;
+	}
+
+	
+}

@@ -1,0 +1,8 @@
+package exit.services.excepciones;
+
+public abstract class ExceptionBiactiva extends Exception {
+
+	abstract public String getFicheroError();
+
+	
+}

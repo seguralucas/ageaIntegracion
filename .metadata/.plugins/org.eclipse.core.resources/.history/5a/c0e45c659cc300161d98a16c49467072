@@ -1,0 +1,12 @@
+import exit.services.fileHandler.ConvertidosJSONCSV;
+import exit.services.json.IJsonRestEstructura;
+
+public class TestConvertidosJSONCSV extends ConvertidosJSONCSV{
+
+	@Override
+	public IJsonRestEstructura crearJson(String[] valoresCsv, String[] cabeceras) {
+		System.out.println();
+		return null;
+	}
+
+}

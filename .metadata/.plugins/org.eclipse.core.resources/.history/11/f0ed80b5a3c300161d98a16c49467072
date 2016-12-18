@@ -1,0 +1,54 @@
+package exit.services.json;
+
+import exit.services.excepciones.ExceptionAnioInvalido;
+import exit.services.excepciones.ExceptionEstadoInvalido;
+import exit.services.excepciones.ExceptionFormatoFecha;
+import exit.services.excepciones.ExceptionIDNoNumerico;
+import exit.services.excepciones.ExceptionIDNullIncidente;
+import exit.services.excepciones.ExceptionLongitud;
+import exit.services.excepciones.ExceptionModoContactoInvalido;
+import exit.services.excepciones.ExceptionTipoIncidenteInvalido;
+
+public class JsonRestContacto implements IJsonRestEstructura{
+	/*************************************/
+	private String pathError;
+	
+	/*************************************/
+
+	/***********************************************/
+	private JSONHandler json;
+	private String  line;
+
+	
+	@Override
+	public JSONHandler createJson(TipoTarea tarea)
+			throws ExceptionLongitud, ExceptionEstadoInvalido, ExceptionTipoIncidenteInvalido, ExceptionIDNullIncidente,
+			ExceptionModoContactoInvalido, ExceptionIDNoNumerico, ExceptionFormatoFecha, ExceptionAnioInvalido {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	private String bpSapId, bpWccId;
+	BP_SAP_ID$BP_WCC_ID$ESTADO_SUSCRIPTOR$NOMBRE$APELLIDO$TIPO_DOCUMENTO$NRO_DOCUMENTO$ESTADO_CIVIL$FECHA_NACIMIENTO$TELEFONO$EMAIL$NACIONALIDAD$SEXO$CALLE$NUMERO$LOCALIDAD$LATITUD$LONGITUD$TIPO_SOCIO$ADICIONALES_EN_USO$CAMPAÑA$PROMOCION$GRUPO_DE_CLIENTE
+
+	@Override
+	public void agregarCampo(String cabecera, String valor) {
+		
+	}
+
+	@Override
+	public String getPathError() {
+		return null;
+	}
+
+	@Override
+	public String getLine() {
+		return line;
+	}
+
+	@Override
+	public void setLine(String line) {
+		this.line=line;
+	}
+
+
+}
