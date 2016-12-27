@@ -1,0 +1,17 @@
+package exit.services.json;
+
+public class RecuperadorFormato {
+
+	private static RecuperadorFormato instancia=null;
+	private String formato;
+	
+	public static RecuperadorFormato getInstancia(){
+		if(!instancia)
+			instancia= new RecuperadorFormato();
+		return instancia;
+			
+	}
+	private RecuperadorFormato(){
+
+	}
+}

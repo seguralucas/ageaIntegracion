@@ -1,0 +1,5 @@
+package exit.services.excepciones;
+
+public class ExceptionHashRepetido {
+
+}

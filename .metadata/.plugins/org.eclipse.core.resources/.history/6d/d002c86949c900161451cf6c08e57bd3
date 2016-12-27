@@ -1,0 +1,57 @@
+package exit.services.json;
+
+import java.io.IOException;
+import java.util.HashMap;
+
+import exit.services.excepciones.ExceptionFormatoFecha;
+import exit.services.excepciones.ExceptionLongitud;
+
+public class JsonGenerico implements IJsonRestEstructura{
+	/*************************************/
+	
+	/*************************************/
+
+	/***********************************************/
+	private String  line;
+	private String formato;
+	HashMap<String, String> map;
+	
+	public JsonGenerico() throws IOException {
+		super();
+		this.formato=RecuperadorFormato.getInstancia().getFormato();
+		map= new HashMap<String, String>();
+	}
+	@Override
+	public void agregarCampo(String cabecera, String valor) {
+		this.formato=this.formato.replaceAll("#"+cabecera+"#", valor);
+		map.put(cabecera, valor);
+	}	
+	
+	@Override
+	public void mostrar() {
+		System.out.println(this.formato);
+	}
+
+	@Override
+	public String getLine() {
+		return line;
+	}
+
+	@Override
+	public void setLine(String line) {
+		this.line=line;
+	}
+
+	public String getJson(){
+		return this.formato;
+	}
+
+	@Override
+	public boolean validarCampos() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+
+
+}

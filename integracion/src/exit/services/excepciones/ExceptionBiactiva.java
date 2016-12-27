@@ -6,6 +6,9 @@ public abstract class ExceptionBiactiva extends Exception {
 	public ExceptionBiactiva(String fichero) {
 		setFicheroErrorExcepcion(fichero);
 	}
+	public ExceptionBiactiva() {
+		super();
+	}
 	public ExceptionBiactiva(String fichero, String mensaje) {
 		super(mensaje);
 		setFicheroErrorExcepcion(fichero);

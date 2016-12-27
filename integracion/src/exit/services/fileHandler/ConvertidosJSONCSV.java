@@ -8,6 +8,7 @@ import java.io.InputStreamReader;
 import java.lang.reflect.InvocationTargetException;
 
 import exit.services.json.IJsonRestEstructura;
+import exit.services.json.JsonGenerico;
 import exit.services.parser.ParserXMLWSConnector;
 
 
@@ -17,12 +18,10 @@ public class ConvertidosJSONCSV{
 		private BufferedReader br=null;
     	private boolean esPrimeraVez=true;
     	private boolean fin=false;
-    	private String jsonPaquete;
     	
     	
-		public ConvertidosJSONCSV(String jsonPaquete){
+		public ConvertidosJSONCSV(){
             csv = new CSVHandler();
-            this.jsonPaquete=jsonPaquete;
 		}
 		
 	   
@@ -68,11 +67,12 @@ public class ConvertidosJSONCSV{
  			return null;
 	   }
 			   
-	   public IJsonRestEstructura crearJson(String[] valoresCsv, String[] cabeceras) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException, ClassNotFoundException{
-		   IJsonRestEstructura restEstructura= (IJsonRestEstructura)Class.forName(this.jsonPaquete).getConstructor().newInstance();
+	   public IJsonRestEstructura crearJson(String[] valoresCsv, String[] cabeceras) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException, ClassNotFoundException, IOException{
+		   IJsonRestEstructura restEstructura= new JsonGenerico();
 		   for(int i=0;i<valoresCsv.length;i++){
 			   restEstructura.agregarCampo(cabeceras[i], valoresCsv[i]);
 		   }
+		   restEstructura.mostrar();
 		   return restEstructura;
 	   }
 

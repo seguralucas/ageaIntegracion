@@ -1,9 +1,0 @@
-package aa.bb;
-
-public class Test {
-
-	public static void main(String[] args) {
-		Class.forName("aa.bb.TestConvertidosJSONCSV").getConstructor(String.class).newInstance(arg);
-	}
-
-}

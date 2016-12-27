@@ -14,13 +14,7 @@ import java.util.concurrent.Executors;
 
 import com.sun.jersey.spi.StringReader.ValidateDefaultValue;
 
-import exit.services.excepciones.ExceptionAnioInvalido;
-import exit.services.excepciones.ExceptionEstadoInvalido;
-import exit.services.excepciones.ExceptionIDNoNumerico;
-import exit.services.excepciones.ExceptionIDNullIncidente;
 import exit.services.excepciones.ExceptionLongitud;
-import exit.services.excepciones.ExceptionModoContactoInvalido;
-import exit.services.excepciones.ExceptionTipoIncidenteInvalido;
 import exit.services.fileHandler.CSVHandler;
 import exit.services.fileHandler.ConvertidosJSONCSV;
 import exit.services.fileHandler.FilesAProcesarManager;
@@ -42,7 +36,7 @@ import exit.services.util.Contador;
 public class EjecutorInsercionIncidentesDistintosFicheros {
 	public static int y=0;
 	public static int z=0;
-	public void insertar(String claseJson) throws InterruptedException, IOException{
+	public void insertar() throws InterruptedException, IOException{
 		CSVHandler csv = new CSVHandler();
 	 	ArrayList<File> pathsCSVEjecutar= FilesAProcesarManager.getInstance().getCSVAProcesar(ParserXMLWSConnector.getInstance().getPathCSVRegistros());
 	 	for(File path:pathsCSVEjecutar){
@@ -59,57 +53,15 @@ public class EjecutorInsercionIncidentesDistintosFicheros {
 				tasks.add(new Callable<Void>() {
 			        public Void call() {
 			        	try {
-				        	ConvertidosJSONCSV csvThread= new ConvertidosJSONCSV(claseJson);
+				        	ConvertidosJSONCSV csvThread= new ConvertidosJSONCSV();
 			        		JSONHandler jsonH=null;
 			        		IJsonRestEstructura jsonEst=null;
 			        		while(!csvThread.isFin()){
 				        		boolean excepcion=false;
 				        		boolean excepcionGenerica=false;
 			        			jsonEst = csvThread.convertirCSVaJSONLineaALineaIncidentes(file);
-			        			if(jsonEst!=null){
-								try{
-									
-										jsonH=jsonEst.createJson(TipoTarea.INSERTAR);
-										System.out.println(jsonH);
-								}
-								catch(ExceptionEstadoInvalido e){
-									excepcion=true;
-									CSVHandler manejadorCSV = new CSVHandler();
-									manejadorCSV.escribirCSVERRORLongitud("error_estado_invalido.csv", jsonEst.getLine());
-								}
-								catch(ExceptionTipoIncidenteInvalido e){
-									excepcion=true;
-									CSVHandler manejadorCSV = new CSVHandler();
-									manejadorCSV.escribirCSVERRORLongitud("error_tipo_incidente_invalido.csv", jsonEst.getLine());
-								}
-								catch(ExceptionIDNullIncidente e){
-									excepcion=true;
-									CSVHandler manejadorCSV = new CSVHandler();
-									manejadorCSV.escribirCSVERRORLongitud("error_id_incidente_null.csv", jsonEst.getLine());
-								}
-								catch(ExceptionModoContactoInvalido e){
-									excepcion=true;
-									CSVHandler manejadorCSV = new CSVHandler();
-									manejadorCSV.escribirCSVERRORLongitud("error_modo_contacto_invalido.csv", jsonEst.getLine());
-								}
-								catch(ExceptionIDNoNumerico e){
-									excepcion=true;
-									CSVHandler manejadorCSV = new CSVHandler();
-									manejadorCSV.escribirCSVERRORLongitud("error_id_no_numerico.csv", jsonEst.getLine());
-								}				
-								catch(ExceptionAnioInvalido e){
-									excepcion=true;
-									CSVHandler manejadorCSV = new CSVHandler();
-									manejadorCSV.escribirCSVERRORLongitud("error_anio_invalido.csv", jsonEst.getLine());									
-								}
-								catch(Exception e){
-									excepcion=true;
-									excepcionGenerica=true;
-									e.printStackTrace();
-								}
-								
-								
-								if(!excepcion){
+			        						        			
+								if(jsonEst.validarCampos()){
 									try{
 										/*INSERTAR*/
 									}
@@ -122,11 +74,7 @@ public class EjecutorInsercionIncidentesDistintosFicheros {
 										}
 
 									}
-								}
-								else if(excepcionGenerica){
-									CSVHandler manejadorCSV = new CSVHandler();
-									manejadorCSV.escribirCSVERRORLongitud("error_generico.csv", jsonEst.getLine());
-								}								
+								}							
 			    				Contador.x++;
 			    				System.out.println(Contador.x);
 			    				if(Contador.x%1000==0){
@@ -135,7 +83,6 @@ public class EjecutorInsercionIncidentesDistintosFicheros {
 			    		    		fw.close();
 			    		    		System.out.println("el proceso lleva procesado un total de: "+Contador.x+" Registros");
 			    				}
-			        			}
 			        		}
 			        		}
 			        	catch (Exception e) {

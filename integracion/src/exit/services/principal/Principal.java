@@ -5,8 +5,12 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.management.ManagementFactory;
 
+import org.json.simple.parser.ParseException;
+
 import exit.services.fileHandler.FilesAProcesarManager;
 import exit.services.parser.ParserXMLWSConnector;
+import exit.services.parser.RecuperadorFormato;
+import exit.services.parser.RecuperadorPropierdadesJson;
 import exit.services.principal.ejecutores.EjecutorInsercionIncidentesDistintosFicheros;
 
 public class Principal {
@@ -15,7 +19,7 @@ public class Principal {
 	public static final String INSERTAR_INCIDENTES="INSERTAR_INCIDENTES";
 	public static final String BORRAR_INCIDENTES="BORRAR_INCIDENTES";
 	
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) throws IOException, ParseException {
    		long time_start, time_end;
     	time_start = System.currentTimeMillis();
     	System.out.println("Usuario: "+ParserXMLWSConnector.getInstance().getUser());
@@ -27,11 +31,11 @@ public class Principal {
         	System.out.println("IP Proxy: "+ParserXMLWSConnector.getInstance().getIpProxy());
     		System.out.println("Puerto Proxy: "+ParserXMLWSConnector.getInstance().getPuertoProxy());
     	}  	
-    	
+    	RecuperadorPropierdadesJson.getInstancia();
     	if(ParserXMLWSConnector.getInstance().getAcction().equalsIgnoreCase(INSERTAR_INCIDENTES)){
     		EjecutorInsercionIncidentesDistintosFicheros hiloApartre = new EjecutorInsercionIncidentesDistintosFicheros();
 	      	try {
-	      		hiloApartre.insertar("exit.services.json.JsonRestContacto");
+	      		hiloApartre.insertar();
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
