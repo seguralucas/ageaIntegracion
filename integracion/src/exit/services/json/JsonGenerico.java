@@ -3,6 +3,10 @@ package exit.services.json;
 import java.io.IOException;
 import java.util.HashMap;
 
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+
 import exit.services.excepciones.ExceptionFormatoFecha;
 import exit.services.excepciones.ExceptionLongitud;
 import exit.services.parser.RecuperadorFormato;
@@ -22,12 +26,18 @@ public class JsonGenerico implements IJsonRestEstructura{
 		this.formato=RecuperadorFormato.getInstancia().getFormato();
 		map= new HashMap<String, String>();
 	}
+	
 	@Override
 	public void agregarCampo(String cabecera, String valor) {
 		this.formato=this.formato.replaceAll("#"+cabecera+"#", valor);
 		map.put(cabecera, valor);
 	}	
 	
+	/**
+	 * Método Exclusivo para debuguear
+	 * @param data
+	 * @throws ParseException
+	 */
 	@Override
 	public void mostrar() {
 		System.out.println(this.formato);
@@ -43,14 +53,18 @@ public class JsonGenerico implements IJsonRestEstructura{
 		this.line=line;
 	}
 
-	public String getJson(){
+	public String getDataJson(){
 		return this.formato;
 	}
 
 	@Override
 	public boolean validarCampos() {
-		// TODO Auto-generated method stub
 		return true;
+	}
+
+	@Override
+	public JSONHandler createJson() throws Exception {
+		return new JSONHandler(getLine(),getDataJson());
 	}
 
 

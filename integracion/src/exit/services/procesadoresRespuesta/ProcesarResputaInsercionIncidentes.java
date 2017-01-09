@@ -7,9 +7,9 @@ import java.io.FileWriter;
 import java.io.PrintWriter;
 
 import exit.services.fileHandler.CSVHandler;
+import exit.services.fileHandler.DirectorioManager;
 import exit.services.json.JSONHandler;
 import exit.services.parser.ParserXMLWSConnector;
-import exit.services.principal.DirectorioManager;
 import exit.services.principal.Separadores;
 
 public class ProcesarResputaInsercionIncidentes implements IProcesarRespuestaREST{
@@ -40,8 +40,7 @@ public class ProcesarResputaInsercionIncidentes implements IProcesarRespuestaRES
        	
        }
        CSVHandler csvHandler = new CSVHandler();
-       csvHandler.escribirCSVInsercionIncidentes(parser.getFicheroCSVOK().replace(".csv", "_insertado_ok.csv"),json,id,lookupName);
-
+     //  csvHandler.escribirCSVInsercionIncidentes(parser.getFicheroCSVOK().replace(".csv", "_insertado_ok.csv"),json,id,lookupName);
 	 }
 	
 	@Override
@@ -64,6 +63,6 @@ public class ProcesarResputaInsercionIncidentes implements IProcesarRespuestaRES
            out.println(json.toString());
            out.println(Separadores.SEPARADOR_ERROR_PETICION);
            out.close();
-		 }
+	}
 	
 }

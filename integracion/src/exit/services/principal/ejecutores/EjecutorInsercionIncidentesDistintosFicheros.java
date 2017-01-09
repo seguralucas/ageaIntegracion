@@ -17,17 +17,17 @@ import com.sun.jersey.spi.StringReader.ValidateDefaultValue;
 import exit.services.excepciones.ExceptionLongitud;
 import exit.services.fileHandler.CSVHandler;
 import exit.services.fileHandler.ConvertidosJSONCSV;
+import exit.services.fileHandler.DirectorioManager;
 import exit.services.fileHandler.FilesAProcesarManager;
-import exit.services.fileHandler.Tipo_Json;
 import exit.services.json.IJsonRestEstructura;
 import exit.services.json.JSONHandler;
 import exit.services.json.JsonRestClienteEstructura;
 import exit.services.json.JsonRestIncidentes;
 import exit.services.json.TipoTarea;
 import exit.services.parser.ParserXMLWSConnector;
-import exit.services.principal.DirectorioManager;
 import exit.services.principal.Principal;
-import exit.services.principal.peticiones.InsertarIncidente;
+import exit.services.principal.peticiones.InsertarAbstractoEntidades;
+import exit.services.principal.peticiones.InsertarGenerico;
 import exit.services.util.Contador;
 
 
@@ -37,7 +37,6 @@ public class EjecutorInsercionIncidentesDistintosFicheros {
 	public static int y=0;
 	public static int z=0;
 	public void insertar() throws InterruptedException, IOException{
-		CSVHandler csv = new CSVHandler();
 	 	ArrayList<File> pathsCSVEjecutar= FilesAProcesarManager.getInstance().getCSVAProcesar(ParserXMLWSConnector.getInstance().getPathCSVRegistros());
 	 	for(File path:pathsCSVEjecutar){
 		 	try {
@@ -61,14 +60,18 @@ public class EjecutorInsercionIncidentesDistintosFicheros {
 				        		boolean excepcionGenerica=false;
 			        			jsonEst = csvThread.convertirCSVaJSONLineaALineaIncidentes(file);
 			        						        			
-								if(jsonEst.validarCampos()){
+								if(jsonEst != null && jsonEst.validarCampos()){
 									try{
-										/*INSERTAR*/
+										jsonH=jsonEst.createJson();
+										InsertarAbstractoEntidades insertar= new InsertarGenerico();
+										insertar.realizarPeticion(jsonH);
+										System.out.println(jsonH.toString());
 									}
 									catch(Exception e){
+										e.printStackTrace();
 										CSVHandler csv= new CSVHandler();
 										try {
-											csv.escribirCSV(ParserXMLWSConnector.getInstance().getFicheroCSVERROREJECUCION().replace(".csv", "_error_no_espeficado.csv"), jsonH.getLine());
+											csv.escribirCSV("error_no_espeficado.csv", jsonEst.getLine());
 										} catch (IOException e1) {
 											e1.printStackTrace();
 										}

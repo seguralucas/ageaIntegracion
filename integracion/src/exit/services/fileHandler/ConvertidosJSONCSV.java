@@ -39,19 +39,19 @@ public class ConvertidosJSONCSV{
   					line=line.substring(1);//Ocasionalmente el primer caracter erra un signo raro y hay que eliminarlo.
   				cabeceras = line.split(ParserXMLWSConnector.getInstance().getSeparadorCSVREGEX());
   				this.esPrimeraVez=false;
-  				CSVHandler.cabecera=line;//Esto es sólo en caso de que estemos haciendo update
+  				CSVHandler.cabeceraFichero=line;//Esto es sólo en caso de que estemos haciendo update
   			}
   			else{
   	    		String[] valoresCsv= line.replace("\"", "'").split(ParserXMLWSConnector.getInstance().getSeparadorCSVREGEX());
 				try{
   					if(ColumnasMayorCabecera(valoresCsv))
   						throw new Exception();
-  					IJsonRestEstructura jsonEstructura=crearJson(valoresCsv,CSVHandler.cabecera.split(ParserXMLWSConnector.getInstance().getSeparadorCSVREGEX()));  	
+  					IJsonRestEstructura jsonEstructura=crearJson(valoresCsv,CSVHandler.cabeceraFichero.split(ParserXMLWSConnector.getInstance().getSeparadorCSVREGEX()));  	
   					jsonEstructura.setLine(line);
     			return jsonEstructura;
   				}
   				catch(Exception e){
-  					csv.escribirCSV("error_parser.csv", line);
+  					csv.escribirCSV("error_parser.csv", line,true);
   					return null;
   				}
   			}
@@ -72,13 +72,13 @@ public class ConvertidosJSONCSV{
 		   for(int i=0;i<valoresCsv.length;i++){
 			   restEstructura.agregarCampo(cabeceras[i], valoresCsv[i]);
 		   }
-		   restEstructura.mostrar();
+//		   restEstructura.mostrar();
 		   return restEstructura;
 	   }
 
 	   
 	   private boolean ColumnasMayorCabecera(String[] valoresCsv){
-		   return CSVHandler.cabecera.split(ParserXMLWSConnector.getInstance().getSeparadorCSVREGEX()).length<valoresCsv.length;
+		   return CSVHandler.cabeceraFichero.split(ParserXMLWSConnector.getInstance().getSeparadorCSVREGEX()).length<valoresCsv.length;
 	   }
 	   
 	   	   

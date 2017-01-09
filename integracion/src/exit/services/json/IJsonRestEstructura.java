@@ -23,7 +23,7 @@ public interface IJsonRestEstructura {
 	}
 	
 	public abstract void mostrar();
-	
+	public abstract JSONHandler createJson() throws Exception;
 	default String insertarFecha(String valor) throws ExceptionFormatoFecha{
 		final String PATH_ERROR="error_formato_fecha.csv";
 		if(valor==null || valor.length()==0)

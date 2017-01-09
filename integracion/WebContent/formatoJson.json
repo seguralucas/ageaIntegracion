@@ -2,12 +2,11 @@
         "CO": {
             "AdicionalesEnUso": #ADICIONALES_EN_USO#,
             "BpSapId": "#BP_SAP_ID#",
-            "BpWccId": #BP_WCC_ID#,
+            "BpWccId": "#BP_WCC_ID#",
             "Calle": "#CALLE#",
             "Campana": "#CAMPANA#",
             "EstadoCivil": "#ESTADO_CIVIL#",
             "EstadoSuscriptor": "#ESTADO_SUSCRIPTOR#",
-	        "GrupoDeCliente": "#GRUPO_DE_CLIENTE#",
             "Latitud": "#LATITUD#",
             "Localidad": "#LOCALIDAD#",
             "Longitud": "#LONGITUD#",
@@ -21,7 +20,7 @@
         }
     },
 	    "name": {
-        "first": #NOMBRE#,
-        "last": #APELLIDO#
+        "first": "#NOMBRE#",
+        "last": "#APELLIDO#"
     }
 }
