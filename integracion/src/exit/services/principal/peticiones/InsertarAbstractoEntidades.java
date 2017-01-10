@@ -9,16 +9,14 @@ import java.net.HttpURLConnection;
 
 import exit.services.fileHandler.CSVHandler;
 import exit.services.json.JSONHandler;
-import exit.services.parser.ParserXMLWSConnector;
+import exit.services.parser.RecuperadorPropiedadConfiguracion;
 import exit.services.principal.WSConector;
-import exit.services.procesadoresRespuesta.IProcesarRespuestaREST;
-import exit.services.procesadoresRespuesta.ProcesarResputaInsercionIncidentes;
 
 public abstract class InsertarAbstractoEntidades {
 	public static int x=0;
 	 public BufferedReader realizarPeticion(JSONHandler json){
 	        try{
-	        	WSConector ws = new WSConector("POST",ParserXMLWSConnector.getInstance().getUrl(),"application/json");
+	        	WSConector ws = new WSConector("POST",RecuperadorPropiedadConfiguracion.getInstance().getUrl(),"application/json");
 	        	HttpURLConnection conn=ws.getConexion();
 	        	DataOutputStream wr = new DataOutputStream(
 	        			conn.getOutputStream());

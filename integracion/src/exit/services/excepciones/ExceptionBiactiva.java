@@ -1,6 +1,10 @@
 package exit.services.excepciones;
 
 public abstract class ExceptionBiactiva extends Exception {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	public String ficheroErrorExcepcion;
 	
 	public ExceptionBiactiva(String fichero) {

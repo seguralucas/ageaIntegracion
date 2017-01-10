@@ -8,10 +8,8 @@ import java.lang.management.ManagementFactory;
 import org.json.simple.parser.ParseException;
 
 import exit.services.fileHandler.DirectorioManager;
-import exit.services.fileHandler.FilesAProcesarManager;
-import exit.services.parser.ParserXMLWSConnector;
-import exit.services.parser.RecuperadorFormato;
-import exit.services.parser.RecuperadorPropierdadesJson;
+
+import exit.services.parser.RecuperadorPropiedadConfiguracion;
 import exit.services.principal.ejecutores.EjecutorInsercionIncidentesDistintosFicheros;
 
 public class Principal {
@@ -20,23 +18,13 @@ public class Principal {
 	public static final String INSERTAR_INCIDENTES="INSERTAR_INCIDENTES";
 	public static final String BORRAR_INCIDENTES="BORRAR_INCIDENTES";
 	
-	public static void mostrarConfiguracion(){
-    	System.out.println("Usuario: "+ParserXMLWSConnector.getInstance().getUser());
-    	System.out.println("Password: "+ParserXMLWSConnector.getInstance().getPassword());
-    	System.out.println("Acción: "+ParserXMLWSConnector.getInstance().getAcction());
-    	System.out.println("Nivel de paralelismo: "+ParserXMLWSConnector.getInstance().getNivelParalelismo());
-    	System.out.println("Usa Proxy: "+ParserXMLWSConnector.getInstance().getUsaProxy());
-    	if(ParserXMLWSConnector.getInstance().getUsaProxy().equalsIgnoreCase("si")){
-        	System.out.println("IP Proxy: "+ParserXMLWSConnector.getInstance().getIpProxy());
-    		System.out.println("Puerto Proxy: "+ParserXMLWSConnector.getInstance().getPuertoProxy());
-    	}  	
-	}
+
 	
 	
 	public static void main(String[] args) throws IOException, ParseException {
    		long time_start, time_end;
     	time_start = System.currentTimeMillis();
-    	mostrarConfiguracion();
+    	RecuperadorPropiedadConfiguracion.getInstance().mostrarConfiguracion();
     		EjecutorInsercionIncidentesDistintosFicheros hiloApartre = new EjecutorInsercionIncidentesDistintosFicheros();
 	      	try {
 	      		hiloApartre.insertar();
@@ -50,9 +38,7 @@ public class Principal {
         		FileWriter fw = new FileWriter(DirectorioManager.getDirectorioFechaYHoraInicio("duracion.txt"));
     			fw.write("El proceso de updateo demoró un total de: "+tiempoDemorado+" minutos");
         		fw.close();
-    		}
-    
-    	
+    		}    	
 /***********************************************************/
 		//***Borrar ficheros de ejecucion***/
 /***********************************************************/

@@ -2,6 +2,11 @@ package exit.services.excepciones;
 
 public class ExceptionFormatoFecha extends ExceptionBiactiva{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public ExceptionFormatoFecha(String fichero,String mensaje){
 		super(fichero, mensaje);
 	}

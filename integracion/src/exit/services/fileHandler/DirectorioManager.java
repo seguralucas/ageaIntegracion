@@ -1,7 +1,6 @@
 package exit.services.fileHandler;
 
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileWriter;
@@ -11,7 +10,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 
-import exit.services.parser.ParserXMLWSConnector;
+import exit.services.parser.RecuperadorPropiedadConfiguracion;
 import exit.services.principal.AlmacenadorFechaYHora;
 
 public class DirectorioManager {
@@ -32,7 +31,7 @@ public class DirectorioManager {
 			    			}
 			    			else{
 				    			csv.escribirCSV(DirectorioManager.getDirectorioFechaYHoraInicioDivision(NOMBRE_TEMP+i+".csv"),line,true);
-			    				if(i>=ParserXMLWSConnector.getInstance().getNivelParalelismo()-1)
+			    				if(i>=RecuperadorPropiedadConfiguracion.getInstance().getNivelParalelismo()-1)
 			    					i=0;
 			    				else
 			    					i++;
@@ -62,7 +61,7 @@ public class DirectorioManager {
     			if(esPrimeraVez){
     				esPrimeraVez=false;
     				CSVHandler.cabeceraFichero=line;
-    				String[] elementos=line.split(ParserXMLWSConnector.getInstance().getSeparadorCSVREGEX());
+    				String[] elementos=line.split(RecuperadorPropiedadConfiguracion.getInstance().getSeparadorCSVREGEX());
     				for(int j=0;j<elementos.length;j++){
     					if(elementos[j].equalsIgnoreCase("NRO_SAC"))
     						columnaNroSac=j;
@@ -71,7 +70,7 @@ public class DirectorioManager {
     			else if(line.trim().length()!=0){
     				agregarLinea=false;
     				if(columnaNroSac!=-1){
-    				String nroSacActual=line.split(ParserXMLWSConnector.getInstance().getSeparadorCSVREGEX())[columnaNroSac];
+    				String nroSacActual=line.split(RecuperadorPropiedadConfiguracion.getInstance().getSeparadorCSVREGEX())[columnaNroSac];
 	    				if(listaSacs.contains(nroSacActual)){
 	    	    			csv.escribirCSV(DirectorioManager.getDirectorioFechaYHoraInicio(CSVHandler.NRO_SAC_REPETIDO_EN_EL_CSV_EJECUTADO),line,true);    				
 	    				}
@@ -84,7 +83,7 @@ public class DirectorioManager {
     					agregarLinea=true;
     				if(agregarLinea){
 		    			csv.escribirCSV(DirectorioManager.getDirectorioFechaYHoraInicioDivision(NOMBRE_TEMP+i+".csv"),line);
-	    				if(i>=ParserXMLWSConnector.getInstance().getNivelParalelismo()-1)
+	    				if(i>=RecuperadorPropiedadConfiguracion.getInstance().getNivelParalelismo()-1)
 	    					i=0;
 	    				else
 	    					i++;

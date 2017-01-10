@@ -1,19 +1,14 @@
 package exit.services.fileHandler;
 
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.ArrayList;
 
-import org.json.simple.JSONArray;
 
 import com.csvreader.CsvWriter;
 
 import exit.services.json.JSONHandler;
-import exit.services.json.JsonRestIncidentes;
-import exit.services.parser.ParserXMLWSConnector;
+import exit.services.parser.RecuperadorPropiedadConfiguracion;
 import exit.services.principal.Separadores;
 
 public class CSVHandler {
@@ -31,7 +26,7 @@ public class CSVHandler {
 
 		private static synchronized void crearCabecer(File file,String cabecera)  throws IOException{
             if(!file.exists() || file.length() == 0){
-            		CsvWriter csvOutput = new CsvWriter(new FileWriter(file, true), ParserXMLWSConnector.getInstance().getSeparadorCSVREGEX().charAt(0));
+            		CsvWriter csvOutput = new CsvWriter(new FileWriter(file, true), RecuperadorPropiedadConfiguracion.getInstance().getSeparadorCSVREGEX().charAt(0));
     				csvOutput.write(cabecera);
     	        	csvOutput.endRecord();
     	            csvOutput.close();
@@ -39,18 +34,18 @@ public class CSVHandler {
 		}
 		
 		private void escribirCampos(File file, String line) throws IOException{
-		 	CsvWriter csvOutput = new CsvWriter(new FileWriter(file, true), ParserXMLWSConnector.getInstance().getSeparadorCSV().charAt(0));
-            String[] campos= line.split(ParserXMLWSConnector.getInstance().getSeparadorCSVREGEX());
+		 	CsvWriter csvOutput = new CsvWriter(new FileWriter(file, true), RecuperadorPropiedadConfiguracion.getInstance().getSeparadorCSV().charAt(0));
+            String[] campos= line.split(RecuperadorPropiedadConfiguracion.getInstance().getSeparadorCSVREGEX());
             for(String c:campos){
-                csvOutput.write(c);        
+                csvOutput.write(insertarNoNull(c));        
             }
             csvOutput.endRecord();		 
             csvOutput.close();
 		}
 		
-		private synchronized void crearCabecer(File file)  throws IOException{
+/*		private synchronized void crearCabecer(File file)  throws IOException{
 			crearCabecer(file,cabeceraFichero);
-		}	
+		}	*/
 		
 		 public void escribirCSV(File file,String line, String cabecera) throws IOException{
 	            crearCabecer(file,cabecera);
@@ -78,9 +73,9 @@ public class CSVHandler {
 			 escribirCSV(DirectorioManager.getDirectorioFechaYHoraInicio(path),json.getLine(),true);
 		 }
 		 
-		 private void insertarCampoVacio(CsvWriter csvOutput) throws IOException{
+/*		 private void insertarCampoVacio(CsvWriter csvOutput) throws IOException{
         	 csvOutput.write(insertarNoNull(""));
-		 }
+		 }*/
 		 
 		 private String insertarNoNull(String cadena){
 			 if(cadena!=null)
@@ -93,8 +88,6 @@ public class CSVHandler {
 		 }
 		 
 		 public synchronized void escribirErrorException(JSONHandler json,StackTraceElement[] stackArray) {
-			  	File fichero = new File(ParserXMLWSConnector.getInstance().getFicheroError()); 
-			     PrintWriter out;
 					try {
 						if(json!=null){
 							this.escribirCSV(PATH_ERROR_EXCEPTION,json.getLine());

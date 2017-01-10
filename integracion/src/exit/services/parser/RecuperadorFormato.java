@@ -24,6 +24,7 @@ public class RecuperadorFormato {
 			sb.append(line);
 		}
 		this.formato=sb.toString();		
+		br.close();
 	}
 	public String getFormato() {
 		return formato;

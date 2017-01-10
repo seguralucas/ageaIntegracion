@@ -1,31 +1,22 @@
 package exit.services.principal.ejecutores;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.net.ConnectException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-import com.sun.jersey.spi.StringReader.ValidateDefaultValue;
 
-import exit.services.excepciones.ExceptionLongitud;
 import exit.services.fileHandler.CSVHandler;
 import exit.services.fileHandler.ConvertidosJSONCSV;
 import exit.services.fileHandler.DirectorioManager;
 import exit.services.fileHandler.FilesAProcesarManager;
-import exit.services.json.IJsonRestEstructura;
+import exit.services.json.AbstractJsonRestEstructura;
 import exit.services.json.JSONHandler;
-import exit.services.json.JsonRestClienteEstructura;
-import exit.services.json.JsonRestIncidentes;
-import exit.services.json.TipoTarea;
-import exit.services.parser.ParserXMLWSConnector;
-import exit.services.principal.Principal;
+import exit.services.parser.RecuperadorPropiedadConfiguracion;
 import exit.services.principal.peticiones.InsertarAbstractoEntidades;
 import exit.services.principal.peticiones.InsertarGenerico;
 import exit.services.util.Contador;
@@ -37,7 +28,7 @@ public class EjecutorInsercionIncidentesDistintosFicheros {
 	public static int y=0;
 	public static int z=0;
 	public void insertar() throws InterruptedException, IOException{
-	 	ArrayList<File> pathsCSVEjecutar= FilesAProcesarManager.getInstance().getCSVAProcesar(ParserXMLWSConnector.getInstance().getPathCSVRegistros());
+	 	ArrayList<File> pathsCSVEjecutar= FilesAProcesarManager.getInstance().getCSVAProcesar(RecuperadorPropiedadConfiguracion.getInstance().getPathCSVRegistros());
 	 	for(File path:pathsCSVEjecutar){
 		 	try {
 				DirectorioManager.SepararFicherosSinSacsRepetidos(path);
@@ -45,7 +36,7 @@ public class EjecutorInsercionIncidentesDistintosFicheros {
 				e.printStackTrace();
 			}
 			ArrayList<File> filesCSVDivididos=FilesAProcesarManager.getInstance().getAllCSV(DirectorioManager.getPathFechaYHoraInicioDivision());
-	    	ExecutorService workers = Executors.newFixedThreadPool(ParserXMLWSConnector.getInstance().getNivelParalelismo());      	
+	    	ExecutorService workers = Executors.newFixedThreadPool(RecuperadorPropiedadConfiguracion.getInstance().getNivelParalelismo());      	
 
 		    List<Callable<Void>> tasks = new ArrayList<>();
 			for(File file: filesCSVDivididos){
@@ -54,10 +45,8 @@ public class EjecutorInsercionIncidentesDistintosFicheros {
 			        	try {
 				        	ConvertidosJSONCSV csvThread= new ConvertidosJSONCSV();
 			        		JSONHandler jsonH=null;
-			        		IJsonRestEstructura jsonEst=null;
+			        		AbstractJsonRestEstructura jsonEst=null;
 			        		while(!csvThread.isFin()){
-				        		boolean excepcion=false;
-				        		boolean excepcionGenerica=false;
 			        			jsonEst = csvThread.convertirCSVaJSONLineaALineaIncidentes(file);
 			        						        			
 								if(jsonEst != null && jsonEst.validarCampos()){
@@ -65,12 +54,12 @@ public class EjecutorInsercionIncidentesDistintosFicheros {
 										jsonH=jsonEst.createJson();
 										InsertarAbstractoEntidades insertar= new InsertarGenerico();
 										insertar.realizarPeticion(jsonH);
-										System.out.println(jsonH.toString());
 									}
 									catch(Exception e){
 										e.printStackTrace();
 										CSVHandler csv= new CSVHandler();
 										try {
+											csv.escribirErrorException(e.getStackTrace());
 											csv.escribirCSV("error_no_espeficado.csv", jsonEst.getLine());
 										} catch (IOException e1) {
 											e1.printStackTrace();

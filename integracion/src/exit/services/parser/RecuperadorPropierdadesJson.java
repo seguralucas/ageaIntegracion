@@ -6,39 +6,72 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
 
-import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+import exit.services.fileHandler.CSVHandler;
+
 public class RecuperadorPropierdadesJson {
 	private static RecuperadorPropierdadesJson instancia=null;
-	private JSONObject json;
+	private JSONObject jsonPropiedades;
 	private HashMap<String, JSONObject> mapCabeceraJson;
-	
-	public static RecuperadorPropierdadesJson getInstancia() throws IOException, ParseException{
+	public static final String PROPIEDAD_TIPO="tipo";
+	public static final String TIPO_FECHA="fecha";
+	public static final String TIPO_ENTERO="entero";
+	public static final String TIPO_CADENA="cadena";
+	public static RecuperadorPropierdadesJson getInstancia(){
 		if(instancia==null)
 			instancia= new RecuperadorPropierdadesJson();
 		return instancia;
 	}
-	private RecuperadorPropierdadesJson() throws IOException, ParseException{
+	
+	public JSONObject getPropiedades(String key){
+		return mapCabeceraJson.get(key);
+	}
+	
+	public String getTipo(String key){
+		JSONObject j= RecuperadorPropierdadesJson.getInstancia().getPropiedades(key);
+		return j==null?"":(String)j.get(PROPIEDAD_TIPO);
+	}
+	
+	private RecuperadorPropierdadesJson(){
 		mapCabeceraJson=new HashMap<String, JSONObject>();
 		File f= new File("WebContent/tiposDeDatos.json");
-		BufferedReader br= new BufferedReader(new FileReader(f));
-		String line;
-		StringBuilder sb= new StringBuilder();
-		while((line=br.readLine()) != null){
-			sb.append(line);
+		try(BufferedReader br= new BufferedReader(new FileReader(f))){
+			String line;
+			StringBuilder sb= new StringBuilder();
+			while((line=br.readLine()) != null){
+				sb.append(line);
+			}
+			JSONParser parser = new JSONParser();
+			this.jsonPropiedades = (JSONObject) parser.parse(sb.toString());
+	
+			for (Object key : this.jsonPropiedades.keySet()) {
+		        String keyStr = (String)key;
+		        Object keyvalue = this.jsonPropiedades.get(keyStr);
+		        if (keyvalue instanceof JSONObject)
+		        	mapCabeceraJson.put(keyStr, (JSONObject)keyvalue);
+		    }
 		}
-		JSONParser parser = new JSONParser();
-		this.json = (JSONObject) parser.parse(sb.toString());
-		JSONArray arr=(JSONArray)json.get("informacion");
+		catch(Exception e){
+			CSVHandler csv= new CSVHandler();
+			e.printStackTrace();
+			csv.escribirErrorException(e.getStackTrace());
+		}
+
+		/*JSONArray arr=(JSONArray)json.get("informacion");
 		for(int i=0;i<arr.size();i++){
 			JSONObject aux=(JSONObject)arr.get(i);
 			mapCabeceraJson.put((String)aux.get("nombre"), aux);
-		}
+		}*/
 	}
-	public JSONObject getFormato() {
-		return json;
+	public JSONObject getJsonPropiedades() {
+		return jsonPropiedades;
+	}
+	
+	public static void main(String[] args) throws IOException, ParseException {
+		JSONObject a=RecuperadorPropierdadesJson.getInstancia().getPropiedades("BP_WCC_ID");
+				System.out.println(a.get("tipo"));
 	}
 }

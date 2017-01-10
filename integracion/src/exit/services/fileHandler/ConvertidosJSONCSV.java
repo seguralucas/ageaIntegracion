@@ -7,9 +7,9 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.lang.reflect.InvocationTargetException;
 
-import exit.services.json.IJsonRestEstructura;
+import exit.services.json.AbstractJsonRestEstructura;
 import exit.services.json.JsonGenerico;
-import exit.services.parser.ParserXMLWSConnector;
+import exit.services.parser.RecuperadorPropiedadConfiguracion;
 
 
 public class ConvertidosJSONCSV{
@@ -25,28 +25,26 @@ public class ConvertidosJSONCSV{
 		}
 		
 	   
-	   public IJsonRestEstructura convertirCSVaJSONLineaALineaIncidentes(File fileCSV) {
+	   public AbstractJsonRestEstructura convertirCSVaJSONLineaALineaIncidentes(File fileCSV) {
 		   try{
 			   if(br==null)
 			   br = new BufferedReader(
 		  		         new InputStreamReader(
 		  		                 new FileInputStream(fileCSV)));
-  		String[] cabeceras=null;
   		while ((line = br.readLine()) != null) {
   			if(this.esPrimeraVez){
   				String firstChar=String.valueOf(line.charAt(0));
   				if(!firstChar.matches("[a-zA-Z]"))
   					line=line.substring(1);//Ocasionalmente el primer caracter erra un signo raro y hay que eliminarlo.
-  				cabeceras = line.split(ParserXMLWSConnector.getInstance().getSeparadorCSVREGEX());
   				this.esPrimeraVez=false;
   				CSVHandler.cabeceraFichero=line;//Esto es sólo en caso de que estemos haciendo update
   			}
   			else{
-  	    		String[] valoresCsv= line.replace("\"", "'").split(ParserXMLWSConnector.getInstance().getSeparadorCSVREGEX());
+  	    		String[] valoresCsv= line.replace("\"", "'").split(RecuperadorPropiedadConfiguracion.getInstance().getSeparadorCSVREGEX());
 				try{
   					if(ColumnasMayorCabecera(valoresCsv))
   						throw new Exception();
-  					IJsonRestEstructura jsonEstructura=crearJson(valoresCsv,CSVHandler.cabeceraFichero.split(ParserXMLWSConnector.getInstance().getSeparadorCSVREGEX()));  	
+  					AbstractJsonRestEstructura jsonEstructura=crearJson(valoresCsv,CSVHandler.cabeceraFichero.split(RecuperadorPropiedadConfiguracion.getInstance().getSeparadorCSVREGEX()));  	
   					jsonEstructura.setLine(line);
     			return jsonEstructura;
   				}
@@ -67,18 +65,17 @@ public class ConvertidosJSONCSV{
  			return null;
 	   }
 			   
-	   public IJsonRestEstructura crearJson(String[] valoresCsv, String[] cabeceras) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException, ClassNotFoundException, IOException{
-		   IJsonRestEstructura restEstructura= new JsonGenerico();
+	   public AbstractJsonRestEstructura crearJson(String[] valoresCsv, String[] cabeceras) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException, ClassNotFoundException, IOException{
+		   AbstractJsonRestEstructura restEstructura= new JsonGenerico();
 		   for(int i=0;i<valoresCsv.length;i++){
 			   restEstructura.agregarCampo(cabeceras[i], valoresCsv[i]);
 		   }
-//		   restEstructura.mostrar();
 		   return restEstructura;
 	   }
 
 	   
 	   private boolean ColumnasMayorCabecera(String[] valoresCsv){
-		   return CSVHandler.cabeceraFichero.split(ParserXMLWSConnector.getInstance().getSeparadorCSVREGEX()).length<valoresCsv.length;
+		   return CSVHandler.cabeceraFichero.split(RecuperadorPropiedadConfiguracion.getInstance().getSeparadorCSVREGEX()).length<valoresCsv.length;
 	   }
 	   
 	   	   

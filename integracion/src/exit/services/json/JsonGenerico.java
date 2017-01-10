@@ -3,59 +3,48 @@ package exit.services.json;
 import java.io.IOException;
 import java.util.HashMap;
 
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-import exit.services.excepciones.ExceptionFormatoFecha;
-import exit.services.excepciones.ExceptionLongitud;
-import exit.services.parser.RecuperadorFormato;
+import exit.services.parser.RecuperadorPropierdadesJson;
 
-public class JsonGenerico implements IJsonRestEstructura{
+public class JsonGenerico extends AbstractJsonRestEstructura{
 	/*************************************/
 	
 	/*************************************/
 
 	/***********************************************/
-	private String  line;
-	private String formato;
-	HashMap<String, String> map;
 	
 	public JsonGenerico() throws IOException {
 		super();
-		this.formato=RecuperadorFormato.getInstancia().getFormato();
-		map= new HashMap<String, String>();
+	}
+	
+	@Override
+	public String alterarValor(String cabecera, String valor) {
+		
+		switch(RecuperadorPropierdadesJson.getInstancia().getTipo(cabecera)){
+		case RecuperadorPropierdadesJson.TIPO_FECHA: return "\""+insertarFecha(valor)+"\"";
+		case RecuperadorPropierdadesJson.TIPO_ENTERO: return valor;
+		case RecuperadorPropierdadesJson.TIPO_CADENA: return "\""+valor+"\"";
+		default: return valor;
+		}
 	}
 	
 	@Override
 	public void agregarCampo(String cabecera, String valor) {
-		this.formato=this.formato.replaceAll("#"+cabecera+"#", valor);
-		map.put(cabecera, valor);
+		insertarValorJson(cabecera,valor);
+		insertarValorMap(cabecera,valor);
 	}	
 	
 	/**
 	 * Método Exclusivo para debuguear
-	 * @param data
+	 * @param dataJson
 	 * @throws ParseException
 	 */
-	@Override
+
 	public void mostrar() {
-		System.out.println(this.formato);
+		System.out.println(this.dataJson);
 	}
 
-	@Override
-	public String getLine() {
-		return line;
-	}
-
-	@Override
-	public void setLine(String line) {
-		this.line=line;
-	}
-
-	public String getDataJson(){
-		return this.formato;
-	}
 
 	@Override
 	public boolean validarCampos() {
@@ -65,6 +54,11 @@ public class JsonGenerico implements IJsonRestEstructura{
 	@Override
 	public JSONHandler createJson() throws Exception {
 		return new JSONHandler(getLine(),getDataJson());
+	}
+
+	@Override
+	public HashMap<String, String> getMapCabeceraValor() {
+		return mapCabeceraValor;
 	}
 
 

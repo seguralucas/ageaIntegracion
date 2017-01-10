@@ -9,7 +9,7 @@ import java.io.PrintWriter;
 import exit.services.fileHandler.CSVHandler;
 import exit.services.fileHandler.DirectorioManager;
 import exit.services.json.JSONHandler;
-import exit.services.parser.ParserXMLWSConnector;
+import exit.services.parser.RecuperadorPropiedadConfiguracion;
 import exit.services.principal.Separadores;
 
 public class InsertarGenerico extends InsertarAbstractoEntidades{
@@ -28,7 +28,7 @@ public class InsertarGenerico extends InsertarAbstractoEntidades{
         		marca=false;
         	}
         }
-        csv.escribirCSV(fichero, id+ParserXMLWSConnector.getInstance().getSeparadorCSV()+json.getLine(), "ID"+ParserXMLWSConnector.getInstance().getSeparadorCSV()+CSVHandler.cabeceraFichero);        
+        csv.escribirCSV(fichero, id+RecuperadorPropiedadConfiguracion.getInstance().getSeparadorCSV()+json.getLine(), "ID"+RecuperadorPropiedadConfiguracion.getInstance().getSeparadorCSV()+CSVHandler.cabeceraFichero);        
 	}
 
 	@Override
