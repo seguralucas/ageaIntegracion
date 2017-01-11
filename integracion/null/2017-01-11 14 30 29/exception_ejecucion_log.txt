@@ -1,0 +1,18 @@
+FileName: null Metodo: open0Clase java.io.FileInputStream Linea -2
+FileName: null Metodo: openClase java.io.FileInputStream Linea -1
+FileName: null Metodo: <init>Clase java.io.FileInputStream Linea -1
+FileName: null Metodo: <init>Clase java.io.FileReader Linea -1
+FileName: RecuperadorFormato.java Metodo: <init>Clase exit.services.parser.RecuperadorFormato Linea 24
+FileName: RecuperadorFormato.java Metodo: getInstanciaClase exit.services.parser.RecuperadorFormato Linea 17
+FileName: ApuntadorDeEntidad.java Metodo: siguienteEntidadClase exit.services.parser.ApuntadorDeEntidad Linea 34
+FileName: RecuperadorPropiedadedConfiguracionEntidad.java Metodo: mainClase exit.services.parser.RecuperadorPropiedadedConfiguracionEntidad Linea 130
+---------------------------------------------------------------------
+FileName: null Metodo: open0Clase java.io.FileInputStream Linea -2
+FileName: null Metodo: openClase java.io.FileInputStream Linea -1
+FileName: null Metodo: <init>Clase java.io.FileInputStream Linea -1
+FileName: null Metodo: <init>Clase java.io.FileReader Linea -1
+FileName: RecuperadorPropierdadesJson.java Metodo: <init>Clase exit.services.parser.RecuperadorPropierdadesJson Linea 42
+FileName: RecuperadorPropierdadesJson.java Metodo: getInstanciaClase exit.services.parser.RecuperadorPropierdadesJson Linea 26
+FileName: ApuntadorDeEntidad.java Metodo: siguienteEntidadClase exit.services.parser.ApuntadorDeEntidad Linea 35
+FileName: RecuperadorPropiedadedConfiguracionEntidad.java Metodo: mainClase exit.services.parser.RecuperadorPropiedadedConfiguracionEntidad Linea 130
+---------------------------------------------------------------------

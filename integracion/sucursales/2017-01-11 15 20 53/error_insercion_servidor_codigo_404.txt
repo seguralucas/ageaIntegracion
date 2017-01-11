@@ -1,0 +1,10 @@
+No se pudo borrar id: 20071
+{
+    "type": "https://help365.custhelp.com/services/rest/connect/exceptions/OSC-CREST-00013",
+    "title": "Recurso no reconocido",
+    "status": 404,
+    "detail": "Resource with id 20071 not found",
+    "instance": "https://help365.custhelp.com/services/rest/connect/v1.3/CO.Sucursales/20071",
+    "o:errorCode": "OSC-CREST-00013"
+}
+**********************************************************************************************

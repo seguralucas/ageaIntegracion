@@ -4,7 +4,8 @@ import java.io.IOException;
 import java.util.HashMap;
 
 import exit.services.fileHandler.CSVHandler;
-import exit.services.parser.RecuperadorFormato;
+import exit.services.singletons.RecuperadorFormato;
+import exit.services.singletons.RecuperadorPropierdadesJson;
 
 public abstract class AbstractJsonRestEstructura {
 	protected String line;
@@ -82,6 +83,20 @@ public abstract class AbstractJsonRestEstructura {
 		return valor;
 	}
 	
+	protected String procesarFecha(String cabecera, String valor){
+		return "\""+insertarFecha(valor)+"\"";
+	}
+	
+	protected String procesarCadena(String cabecera, String valor){
+		return "\""+valor+"\"";
+	}
+	
+	protected String procesarEntero(String cabecera, String valor){
+		if(RecuperadorPropierdadesJson.getInstancia().isBorrarCarNoNumericos(cabecera))
+			return valor.replaceAll("[^0-9]", "");
+		return valor;
+	}
+	
 	
 	public String getLine(){
 		return line;
@@ -93,5 +108,6 @@ public abstract class AbstractJsonRestEstructura {
 	public String getDataJson(){
 		return dataJson;
 	}
+	
 	
 }

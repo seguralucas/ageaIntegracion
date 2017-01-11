@@ -8,9 +8,9 @@ import java.lang.management.ManagementFactory;
 import org.json.simple.parser.ParseException;
 
 import exit.services.fileHandler.DirectorioManager;
-
-import exit.services.parser.RecuperadorPropiedadConfiguracion;
 import exit.services.principal.ejecutores.EjecutorInsercionIncidentesDistintosFicheros;
+import exit.services.singletons.ApuntadorDeEntidad;
+import exit.services.singletons.RecuperadorPropiedadedConfiguracionEntidad;
 
 public class Principal {
 	public static final String UPDATE_CONTACTOS="UPDATE_CONTACTOS";
@@ -24,13 +24,15 @@ public class Principal {
 	public static void main(String[] args) throws IOException, ParseException {
    		long time_start, time_end;
     	time_start = System.currentTimeMillis();
-    	RecuperadorPropiedadConfiguracion.getInstance().mostrarConfiguracion();
+    	while(ApuntadorDeEntidad.getInstance().siguienteEntidad()){
+	    	RecuperadorPropiedadedConfiguracionEntidad.getInstance().mostrarConfiguracion();
     		EjecutorInsercionIncidentesDistintosFicheros hiloApartre = new EjecutorInsercionIncidentesDistintosFicheros();
 	      	try {
 	      		hiloApartre.insertar();
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+	    }
 	    	time_end = System.currentTimeMillis();
 	    	System.out.println(ManagementFactory.getThreadMXBean().getThreadCount() );
 	    	double tiempoDemorado=(time_end - time_start)/1000/60 ;

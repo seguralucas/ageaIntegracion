@@ -5,7 +5,7 @@ import java.util.HashMap;
 
 import org.json.simple.parser.ParseException;
 
-import exit.services.parser.RecuperadorPropierdadesJson;
+import exit.services.singletons.RecuperadorPropierdadesJson;
 
 public class JsonGenerico extends AbstractJsonRestEstructura{
 	/*************************************/
@@ -20,12 +20,11 @@ public class JsonGenerico extends AbstractJsonRestEstructura{
 	
 	@Override
 	public String alterarValor(String cabecera, String valor) {
-		
-		switch(RecuperadorPropierdadesJson.getInstancia().getTipo(cabecera)){
-		case RecuperadorPropierdadesJson.TIPO_FECHA: return "\""+insertarFecha(valor)+"\"";
-		case RecuperadorPropierdadesJson.TIPO_ENTERO: return valor;
-		case RecuperadorPropierdadesJson.TIPO_CADENA: return "\""+valor+"\"";
-		default: return valor;
+			switch(RecuperadorPropierdadesJson.getInstancia().getTipo(cabecera)){
+			case RecuperadorPropierdadesJson.TIPO_FECHA: return procesarFecha(cabecera,valor);
+			case RecuperadorPropierdadesJson.TIPO_ENTERO: return procesarEntero(cabecera,valor);
+			case RecuperadorPropierdadesJson.TIPO_CADENA: return  procesarCadena(cabecera,valor);
+			default: return valor;
 		}
 	}
 	

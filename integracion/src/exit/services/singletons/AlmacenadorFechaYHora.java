@@ -1,4 +1,4 @@
-package exit.services.principal;
+package exit.services.singletons;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -17,5 +17,9 @@ public class AlmacenadorFechaYHora {
 		if(fechaYHoraInicio==null)
 			fechaYHoraInicio=setFechaYHora();
 		return fechaYHoraInicio;
+	}
+	
+	static void reiniciar(){
+		fechaYHoraInicio=null;
 	}
 }

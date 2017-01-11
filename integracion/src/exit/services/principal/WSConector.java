@@ -7,7 +7,7 @@ import java.net.Proxy;
 import java.net.URL;
 
 import Decoder.BASE64Encoder;
-import exit.services.parser.RecuperadorPropiedadConfiguracion;
+import exit.services.singletons.RecuperadorPropiedadedConfiguracionEntidad;
 
 
 
@@ -26,13 +26,13 @@ public class WSConector {
 	 }
 	 
 	 public WSConector(String method) throws Exception{
-		 	this(method,RecuperadorPropiedadConfiguracion.getInstance().getUrl());
+		 	this(method,RecuperadorPropiedadedConfiguracionEntidad.getInstance().getUrl());
 	 }
 	
 	private void initConecction(String method, String contentType) throws Exception{
 		HttpURLConnection conn=null;
-		if(RecuperadorPropiedadConfiguracion.getInstance().getUsaProxy().equalsIgnoreCase("SI")){
-			Proxy proxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress(RecuperadorPropiedadConfiguracion.getInstance().getIpProxy(), Integer.parseInt(RecuperadorPropiedadConfiguracion.getInstance().getPuertoProxy())));
+		if(RecuperadorPropiedadedConfiguracionEntidad.getInstance().getUsaProxy().equalsIgnoreCase("SI")){
+			Proxy proxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress(RecuperadorPropiedadedConfiguracionEntidad.getInstance().getIpProxy(), Integer.parseInt(RecuperadorPropiedadedConfiguracionEntidad.getInstance().getPuertoProxy())));
 			conn = (HttpURLConnection) url.openConnection(proxy);
 		}
 		else
@@ -54,7 +54,7 @@ public class WSConector {
 			conn.setRequestProperty("Content-Type", contentType);
 		conn.setRequestProperty("charset", "UTF-8");
 		conn.setDoOutput(true);
-		String userPassword = RecuperadorPropiedadConfiguracion.getInstance().getUser() + ":" + RecuperadorPropiedadConfiguracion.getInstance().getPassword();
+		String userPassword = RecuperadorPropiedadedConfiguracionEntidad.getInstance().getUser() + ":" + RecuperadorPropiedadedConfiguracionEntidad.getInstance().getPassword();
 		BASE64Encoder encode= new BASE64Encoder();
 		String encoding = encode.encode(userPassword.getBytes());
 		conn.setRequestProperty("Authorization", "Basic " + encoding);	 

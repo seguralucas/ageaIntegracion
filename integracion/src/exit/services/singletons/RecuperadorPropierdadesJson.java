@@ -1,4 +1,4 @@
-package exit.services.parser;
+package exit.services.singletons;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -17,6 +17,7 @@ public class RecuperadorPropierdadesJson {
 	private JSONObject jsonPropiedades;
 	private HashMap<String, JSONObject> mapCabeceraJson;
 	public static final String PROPIEDAD_TIPO="tipo";
+	public static final String PROPIEDAD_BORRAR_CAR_NO_NUMERICOS="borrarCarNoNumericos";
 	public static final String TIPO_FECHA="fecha";
 	public static final String TIPO_ENTERO="entero";
 	public static final String TIPO_CADENA="cadena";
@@ -37,7 +38,7 @@ public class RecuperadorPropierdadesJson {
 	
 	private RecuperadorPropierdadesJson(){
 		mapCabeceraJson=new HashMap<String, JSONObject>();
-		File f= new File("WebContent/tiposDeDatos.json");
+		File f= new File("WebContent/"+ApuntadorDeEntidad.getInstance().getEntidadActual()+"/tiposDeDatos.json");
 		try(BufferedReader br= new BufferedReader(new FileReader(f))){
 			String line;
 			StringBuilder sb= new StringBuilder();
@@ -66,6 +67,17 @@ public class RecuperadorPropierdadesJson {
 			mapCabeceraJson.put((String)aux.get("nombre"), aux);
 		}*/
 	}
+	
+	void reiniciar(){
+		instancia=null;
+	}
+	
+	public boolean isBorrarCarNoNumericos(String key){
+		JSONObject j= RecuperadorPropierdadesJson.getInstancia().getPropiedades(key);
+		Object aux=j==null?null:j.get(PROPIEDAD_BORRAR_CAR_NO_NUMERICOS);
+		return aux==null?false:(Boolean)j.get(PROPIEDAD_BORRAR_CAR_NO_NUMERICOS);
+	}
+	
 	public JSONObject getJsonPropiedades() {
 		return jsonPropiedades;
 	}

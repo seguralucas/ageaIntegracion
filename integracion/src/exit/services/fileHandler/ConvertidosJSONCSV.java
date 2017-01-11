@@ -9,7 +9,7 @@ import java.lang.reflect.InvocationTargetException;
 
 import exit.services.json.AbstractJsonRestEstructura;
 import exit.services.json.JsonGenerico;
-import exit.services.parser.RecuperadorPropiedadConfiguracion;
+import exit.services.singletons.RecuperadorPropiedadedConfiguracionEntidad;
 
 
 public class ConvertidosJSONCSV{
@@ -40,11 +40,11 @@ public class ConvertidosJSONCSV{
   				CSVHandler.cabeceraFichero=line;//Esto es sólo en caso de que estemos haciendo update
   			}
   			else{
-  	    		String[] valoresCsv= line.replace("\"", "'").split(RecuperadorPropiedadConfiguracion.getInstance().getSeparadorCSVREGEX());
+  	    		String[] valoresCsv= line.replace("\"", "'").split(RecuperadorPropiedadedConfiguracionEntidad.getInstance().getSeparadorCSVREGEX());
 				try{
   					if(ColumnasMayorCabecera(valoresCsv))
   						throw new Exception();
-  					AbstractJsonRestEstructura jsonEstructura=crearJson(valoresCsv,CSVHandler.cabeceraFichero.split(RecuperadorPropiedadConfiguracion.getInstance().getSeparadorCSVREGEX()));  	
+  					AbstractJsonRestEstructura jsonEstructura=crearJson(valoresCsv,CSVHandler.cabeceraFichero.split(RecuperadorPropiedadedConfiguracionEntidad.getInstance().getSeparadorCSVREGEX()));  	
   					jsonEstructura.setLine(line);
     			return jsonEstructura;
   				}
@@ -75,7 +75,7 @@ public class ConvertidosJSONCSV{
 
 	   
 	   private boolean ColumnasMayorCabecera(String[] valoresCsv){
-		   return CSVHandler.cabeceraFichero.split(RecuperadorPropiedadConfiguracion.getInstance().getSeparadorCSVREGEX()).length<valoresCsv.length;
+		   return CSVHandler.cabeceraFichero.split(RecuperadorPropiedadedConfiguracionEntidad.getInstance().getSeparadorCSVREGEX()).length<valoresCsv.length;
 	   }
 	   
 	   	   

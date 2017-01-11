@@ -16,9 +16,9 @@ import exit.services.fileHandler.DirectorioManager;
 import exit.services.fileHandler.FilesAProcesarManager;
 import exit.services.json.AbstractJsonRestEstructura;
 import exit.services.json.JSONHandler;
-import exit.services.parser.RecuperadorPropiedadConfiguracion;
 import exit.services.principal.peticiones.InsertarAbstractoEntidades;
 import exit.services.principal.peticiones.InsertarGenerico;
+import exit.services.singletons.RecuperadorPropiedadedConfiguracionEntidad;
 import exit.services.util.Contador;
 
 
@@ -28,15 +28,15 @@ public class EjecutorInsercionIncidentesDistintosFicheros {
 	public static int y=0;
 	public static int z=0;
 	public void insertar() throws InterruptedException, IOException{
-	 	ArrayList<File> pathsCSVEjecutar= FilesAProcesarManager.getInstance().getCSVAProcesar(RecuperadorPropiedadConfiguracion.getInstance().getPathCSVRegistros());
+	 	ArrayList<File> pathsCSVEjecutar= FilesAProcesarManager.getInstance().getCSVAProcesar(RecuperadorPropiedadedConfiguracionEntidad.getInstance().getPathCSVRegistros());
 	 	for(File path:pathsCSVEjecutar){
 		 	try {
-				DirectorioManager.SepararFicherosSinSacsRepetidos(path);
+				DirectorioManager.SepararFicheros(path);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
 			ArrayList<File> filesCSVDivididos=FilesAProcesarManager.getInstance().getAllCSV(DirectorioManager.getPathFechaYHoraInicioDivision());
-	    	ExecutorService workers = Executors.newFixedThreadPool(RecuperadorPropiedadConfiguracion.getInstance().getNivelParalelismo());      	
+	    	ExecutorService workers = Executors.newFixedThreadPool(RecuperadorPropiedadedConfiguracionEntidad.getInstance().getNivelParalelismo());      	
 
 		    List<Callable<Void>> tasks = new ArrayList<>();
 			for(File file: filesCSVDivididos){
@@ -51,6 +51,7 @@ public class EjecutorInsercionIncidentesDistintosFicheros {
 			        						        			
 								if(jsonEst != null && jsonEst.validarCampos()){
 									try{
+										System.out.println(jsonEst.getDataJson());
 										jsonH=jsonEst.createJson();
 										InsertarAbstractoEntidades insertar= new InsertarGenerico();
 										insertar.realizarPeticion(jsonH);

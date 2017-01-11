@@ -32,7 +32,7 @@ public class FilesAProcesarManager {
 		}
 	
 	
-	public ArrayList<File> getCSVAProcesar(String path){
+	public ArrayList<File> getCSVEjecutarAProcesar(String path){
 		ArrayList<File> paths = new ArrayList<File>();
 		File folder = new File(path);
 		File[] listOfFiles = folder.listFiles();
@@ -48,10 +48,20 @@ public class FilesAProcesarManager {
 		    return paths;
 		}
 	
+	public ArrayList<File> getCSVAProcesar(String path){
+		ArrayList<File> paths = new ArrayList<File>();
+		File f = new File(path);
+		if(f.exists())
+			paths.add(f);
+		return paths;
+	}
+	
+	
+	
 	public void deleteCSVAProcesar(){
 		for(File f: this.csvAProcesar){
 			f.delete();
 		}
-		}	
+	}	
 
 }
