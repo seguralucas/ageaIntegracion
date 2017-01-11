@@ -20,7 +20,7 @@ public class EliminarGenerico extends EliminarAbstractoEntidad {
 
 	@Override
 	public void procesarPeticionError(BufferedReader in,  Integer id, int responseCode) throws Exception{
-		String path=("error_insercion_servidor_codigo_"+responseCode+".txt");
+		String path=("error_borrado_servidor_codigo_"+responseCode+".txt");
 	    File fichero = DirectorioManager.getDirectorioFechaYHoraInicio(path);
 	    PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(fichero, true)));
         out.println("No se pudo borrar id: "+id);
