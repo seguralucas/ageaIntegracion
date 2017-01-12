@@ -28,6 +28,8 @@ public class Principal {
 	    	RecuperadorPropiedadedConfiguracionEntidad.getInstance().mostrarConfiguracion();
     		EjecutorInsercionIncidentesDistintosFicheros hiloApartre = new EjecutorInsercionIncidentesDistintosFicheros();
 	      	try {
+	      		if(RecuperadorPropiedadedConfiguracionEntidad.getInstance().getMetodoPreEjecutor()!=null)
+	      			PreEjecuciones.ejecutar(RecuperadorPropiedadedConfiguracionEntidad.getInstance().getMetodoPreEjecutor(), RecuperadorPropiedadedConfiguracionEntidad.getInstance().getParametroPreEjecutor());
 	      		hiloApartre.insertar();
 			} catch (Exception e) {
 				e.printStackTrace();

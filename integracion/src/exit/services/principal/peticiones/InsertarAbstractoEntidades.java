@@ -9,12 +9,11 @@ import java.net.HttpURLConnection;
 
 import exit.services.fileHandler.CSVHandler;
 import exit.services.json.JSONHandler;
-import exit.services.principal.WSConector;
 import exit.services.singletons.RecuperadorPropiedadedConfiguracionEntidad;
 
 public abstract class InsertarAbstractoEntidades {
 	public static int x=0;
-	 public BufferedReader realizarPeticion(JSONHandler json){
+	 public Object realizarPeticion(JSONHandler json){
 	        try{
 	        	WSConector ws = new WSConector("POST",RecuperadorPropiedadedConfiguracionEntidad.getInstance().getUrl(),"application/json");
 	        	HttpURLConnection conn=ws.getConexion();
@@ -25,18 +24,19 @@ public abstract class InsertarAbstractoEntidades {
 	        	wr.close();
 	            int responseCode = conn.getResponseCode();
 	            BufferedReader in;
+	            Object o;
 	            if(responseCode == 201){
 	            	in = new BufferedReader(
 		                    new InputStreamReader(conn.getInputStream()));
-	            	procesarPeticionOK(in, json,responseCode);
+	            	o=procesarPeticionOK(in, json,responseCode);
 	            	
 	            }
 	            else{
 	            	in = new BufferedReader(
 		                    new InputStreamReader(conn.getErrorStream()));
-	            	procesarPeticionError(in,json,responseCode);
+	            	o=procesarPeticionError(in,json,responseCode);
 	            }
-	            return in;	 
+	            return o==null?in:o;	 
 	            }	                
             catch (ConnectException e) {
 				CSVHandler csv= new CSVHandler();
@@ -53,6 +53,6 @@ public abstract class InsertarAbstractoEntidades {
 				return null;
 			}
         }
-		abstract void procesarPeticionOK(BufferedReader in, JSONHandler json,int responseCode) throws Exception;
-		abstract void procesarPeticionError(BufferedReader in, JSONHandler json, int responseCode) throws Exception;	 
+		abstract Object procesarPeticionOK(BufferedReader in, JSONHandler json,int responseCode) throws Exception;
+		abstract Object procesarPeticionError(BufferedReader in, JSONHandler json, int responseCode) throws Exception;	 
 }

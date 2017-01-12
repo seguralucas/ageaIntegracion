@@ -7,16 +7,15 @@ import java.net.ConnectException;
 import java.net.HttpURLConnection;
 
 import exit.services.fileHandler.CSVHandler;
-import exit.services.principal.WSConector;
 import exit.services.singletons.ApuntadorDeEntidad;
 import exit.services.singletons.RecuperadorPropiedadedConfiguracionEntidad;
 
 public abstract class GetAbstractoGenerico {
 	public static int x=0;
-	public BufferedReader realizarPeticion(){
+	public Object realizarPeticion(){
 		return realizarPeticion(null);
 	}
-	 public BufferedReader realizarPeticion(Integer id){
+	 public Object realizarPeticion(Long id){
 	        try{
 	        	WSConector ws;
 	        	if(id!=null)
@@ -26,24 +25,25 @@ public abstract class GetAbstractoGenerico {
 	        	HttpURLConnection conn=ws.getConexion();
 	            int responseCode = conn.getResponseCode();
 	            BufferedReader in;
+	            Object o;
 	            if(responseCode == 200){
 	            	in = new BufferedReader(
 		                    new InputStreamReader(conn.getInputStream()));
 	            	if(id!=null)
-	            		procesarPeticionOK(in, id,responseCode);
+	            		o=procesarPeticionOK(in, id,responseCode);
 	            	else
-	            		procesarPeticionOK(in,responseCode);
+	            		o=procesarPeticionOK(in,responseCode);
 	            	
 	            }
 	            else{
 	            	in = new BufferedReader(
 		                    new InputStreamReader(conn.getErrorStream()));
 	            	if(id!=null)
-	            		procesarPeticionError(in,id,responseCode);
+	            		o=procesarPeticionError(in,id,responseCode);
 	            	else
-	            		procesarPeticionError(in,responseCode);
+	            		o=procesarPeticionError(in,responseCode);
 	            }
-	            return in;	 
+	            return o==null?in:o;	 
 	            }	                
           catch (ConnectException e) {
 				CSVHandler csv= new CSVHandler();
@@ -63,9 +63,9 @@ public abstract class GetAbstractoGenerico {
 				return null;
 			}
       }
-		abstract void procesarPeticionOK(BufferedReader in, Integer id,int responseCode) throws Exception;
-		abstract void procesarPeticionError(BufferedReader in, Integer id, int responseCode) throws Exception;
-		abstract void procesarPeticionOK(BufferedReader in, int responseCode) throws Exception;
-		abstract void procesarPeticionError(BufferedReader in, int responseCode) throws Exception;
+		abstract Object procesarPeticionOK(BufferedReader in, Long id,int responseCode) throws Exception;
+		abstract Object procesarPeticionError(BufferedReader in, Long id, int responseCode) throws Exception;
+		abstract Object procesarPeticionOK(BufferedReader in, int responseCode) throws Exception;
+		abstract Object procesarPeticionError(BufferedReader in, int responseCode) throws Exception;
 
 }

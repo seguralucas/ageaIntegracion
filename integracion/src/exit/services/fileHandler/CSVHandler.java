@@ -8,7 +8,6 @@ import java.io.IOException;
 import com.csvreader.CsvWriter;
 
 import exit.services.json.JSONHandler;
-import exit.services.principal.Separadores;
 import exit.services.singletons.RecuperadorPropiedadedConfiguracionEntidad;
 
 public class CSVHandler {
@@ -102,7 +101,7 @@ public class CSVHandler {
 					for(StackTraceElement ste: stackArray){
 					     this.escribirCSV(PATH_ERROR_EXCEPTION_LOG,"FileName: "+ste.getFileName()+" Metodo: "+ste.getMethodName()+"Clase "+ste.getClassName()+" Linea "+ste.getLineNumber(),false);
 					}		
-					this.escribirCSV(PATH_ERROR_EXCEPTION_LOG,Separadores.SEPARADOR_ERROR_TRYCATCH);
+					this.escribirCSV(PATH_ERROR_EXCEPTION_LOG,ConstantesGenerales.SEPARADOR_ERROR_TRYCATCH);
 					} catch (IOException e) {
 					e.printStackTrace();
 				}

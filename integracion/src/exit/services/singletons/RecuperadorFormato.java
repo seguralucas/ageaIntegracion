@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileReader;
 
 import exit.services.fileHandler.CSVHandler;
+import exit.services.fileHandler.ConstantesGenerales;
 
 public class RecuperadorFormato {
 
@@ -17,7 +18,7 @@ public class RecuperadorFormato {
 		return instancia;
 	}
 	private RecuperadorFormato(){
-		File f= new File("WebContent/"+ApuntadorDeEntidad.getInstance().getEntidadActual()+"/formatoJson.json");
+		File f= new File(ConstantesGenerales.PATH_CONFIGURACION+"/"+ApuntadorDeEntidad.getInstance().getEntidadActual()+"/formatoJson.json");
 		String line;
 		StringBuilder sb= new StringBuilder();
 		try(BufferedReader br= new BufferedReader(new FileReader(f))){

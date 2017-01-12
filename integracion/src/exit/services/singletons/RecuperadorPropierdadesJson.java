@@ -11,6 +11,7 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import exit.services.fileHandler.CSVHandler;
+import exit.services.fileHandler.ConstantesGenerales;
 
 public class RecuperadorPropierdadesJson {
 	private static RecuperadorPropierdadesJson instancia=null;
@@ -38,7 +39,7 @@ public class RecuperadorPropierdadesJson {
 	
 	private RecuperadorPropierdadesJson(){
 		mapCabeceraJson=new HashMap<String, JSONObject>();
-		File f= new File("WebContent/"+ApuntadorDeEntidad.getInstance().getEntidadActual()+"/tiposDeDatos.json");
+		File f= new File(ConstantesGenerales.PATH_CONFIGURACION+"/"+ApuntadorDeEntidad.getInstance().getEntidadActual()+"/tiposDeDatos.json");
 		try(BufferedReader br= new BufferedReader(new FileReader(f))){
 			String line;
 			StringBuilder sb= new StringBuilder();

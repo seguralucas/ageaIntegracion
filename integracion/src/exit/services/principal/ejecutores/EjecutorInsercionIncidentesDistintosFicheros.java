@@ -51,7 +51,6 @@ public class EjecutorInsercionIncidentesDistintosFicheros {
 			        						        			
 								if(jsonEst != null && jsonEst.validarCampos()){
 									try{
-										System.out.println(jsonEst.getDataJson());
 										jsonH=jsonEst.createJson();
 										InsertarAbstractoEntidades insertar= new InsertarGenerico();
 										insertar.realizarPeticion(jsonH);

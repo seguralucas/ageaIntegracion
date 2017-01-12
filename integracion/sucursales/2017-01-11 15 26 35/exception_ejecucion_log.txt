@@ -1,7 +1,0 @@
-""
-Error al eliminar id: 20078
-FileName: null Metodo: <init>Clase java.io.Reader Linea -1
-FileName: null Metodo: <init>Clase java.io.InputStreamReader Linea -1
-FileName: EliminarAbstractoEntidad.java Metodo: realizarPeticionClase exit.services.principal.peticiones.EliminarAbstractoEntidad Linea 29
-FileName: EliminarGenerico.java Metodo: mainClase exit.services.principal.peticiones.EliminarGenerico Linea 41
----------------------------------------------------------------------

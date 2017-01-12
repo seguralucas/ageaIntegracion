@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.Properties;
 
 import exit.services.fileHandler.CSVHandler;
+import exit.services.fileHandler.ConstantesGenerales;
 import exit.services.fileHandler.DirectorioManager;
 
 public class RecuperadorPropiedadedConfiguracionEntidad {
@@ -16,7 +17,7 @@ public class RecuperadorPropiedadedConfiguracionEntidad {
     	mapPropiedades=new HashMap<String,String>();
         Properties props = new Properties();
         try{
-		props.load(new FileReader("WebContent/"+ApuntadorDeEntidad.getInstance().getEntidadActual()+"/ConfiguracionEntidad.properties"));
+		props.load(new FileReader(ConstantesGenerales.PATH_CONFIGURACION+"/"+ApuntadorDeEntidad.getInstance().getEntidadActual()+"/ConfiguracionEntidad.properties"));
 		for(String key : props.stringPropertyNames()) 
 			  mapPropiedades.put(key, props.getProperty(key));
         }
@@ -68,6 +69,14 @@ public class RecuperadorPropiedadedConfiguracionEntidad {
 		return getValueMap("url");
 	}
 
+	public String getMetodoPreEjecutor() {
+		return getValueMap("metodoPreEjecutor");
+	}
+
+	public String getParametroPreEjecutor() {
+		return getValueMap("parametroPreEjecutor");
+	}
+	
 	public String getUser() {
 		if(getValueMap("user")==null)
 			return RecuperadorPropiedadesConfiguracionGenerales.getInstance().getUser();

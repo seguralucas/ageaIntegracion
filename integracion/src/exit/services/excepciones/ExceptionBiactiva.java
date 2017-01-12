@@ -1,6 +1,6 @@
 package exit.services.excepciones;
 
-public abstract class ExceptionBiactiva extends Exception {
+public class ExceptionBiactiva extends Exception {
 	/**
 	 * 
 	 */

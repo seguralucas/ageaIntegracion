@@ -1,7 +1,7 @@
-package exit.services.principal;
+package exit.services.fileHandler;
 
-public class Separadores {
+public class ConstantesGenerales {
 	 public final static String SEPARADOR_ERROR_PETICION = "**********************************************************************************************";
 	 public final static String SEPARADOR_ERROR_TRYCATCH = "---------------------------------------------------------------------";
-
+	 public final static String PATH_CONFIGURACION="Configuracion";
 }

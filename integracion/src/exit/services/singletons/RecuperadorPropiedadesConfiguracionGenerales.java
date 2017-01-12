@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Properties;
 
+import exit.services.fileHandler.ConstantesGenerales;
 import exit.services.fileHandler.DirectorioManager;
 
 public class RecuperadorPropiedadesConfiguracionGenerales {
@@ -15,7 +16,7 @@ public class RecuperadorPropiedadesConfiguracionGenerales {
     	mapPropiedades=new HashMap<String,String>();
         Properties props = new Properties();
         try{
-		props.load(new FileReader("WebContent/ConfiguracionGeneral.properties"));
+		props.load(new FileReader(ConstantesGenerales.PATH_CONFIGURACION+"/ConfiguracionGeneral.properties"));
 		for(String key : props.stringPropertyNames()) 
 			  mapPropiedades.put(key, props.getProperty(key));
         }

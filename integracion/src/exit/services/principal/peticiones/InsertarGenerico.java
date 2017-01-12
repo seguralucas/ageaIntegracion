@@ -8,14 +8,14 @@ import java.io.PrintWriter;
 
 import exit.services.fileHandler.CSVHandler;
 import exit.services.fileHandler.DirectorioManager;
+import exit.services.fileHandler.ConstantesGenerales;
 import exit.services.json.JSONHandler;
-import exit.services.principal.Separadores;
 import exit.services.singletons.RecuperadorPropiedadedConfiguracionEntidad;
 
 public class InsertarGenerico extends InsertarAbstractoEntidades{
 
 	@Override
-	void procesarPeticionOK(BufferedReader in, JSONHandler json, int responseCode) throws Exception {
+	protected Object procesarPeticionOK(BufferedReader in, JSONHandler json, int responseCode) throws Exception {
 		CSVHandler csv= new CSVHandler();
 	    File fichero = DirectorioManager.getDirectorioFechaYHoraInicio(CSVHandler.PATH_INSERTADOS_OK);
         String inputLine;
@@ -29,10 +29,11 @@ public class InsertarGenerico extends InsertarAbstractoEntidades{
         	}
         }
         csv.escribirCSV(fichero, id+RecuperadorPropiedadedConfiguracionEntidad.getInstance().getSeparadorCSV()+json.getLine(), "ID"+RecuperadorPropiedadedConfiguracionEntidad.getInstance().getSeparadorCSV()+CSVHandler.cabeceraFichero);        
+        return null;
 	}
 
 	@Override
-	public void procesarPeticionError(BufferedReader in, JSONHandler json, int responseCode) throws Exception{
+	protected Object procesarPeticionError(BufferedReader in, JSONHandler json, int responseCode) throws Exception{
 		String path=("error_insercion_servidor_codigo_"+responseCode+".txt");
 	    File fichero = DirectorioManager.getDirectorioFechaYHoraInicio(path);
 	    PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(fichero, true)));
@@ -43,7 +44,8 @@ public class InsertarGenerico extends InsertarAbstractoEntidades{
         }
         CSVHandler csvHandler = new CSVHandler();
         csvHandler.escribirCSV("error_insercion_servidor_codigo_"+responseCode+".csv",json);            
-        out.println(Separadores.SEPARADOR_ERROR_PETICION);
+        out.println(ConstantesGenerales.SEPARADOR_ERROR_PETICION);
         out.close();
+        return null;
 	 }
 }
