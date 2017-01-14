@@ -14,6 +14,11 @@ public class JSONHandler{
 		crearteJson(data);
 	}
 	
+	public JSONHandler(String line, JSONObject json) throws ParseException{
+		setLine(line);
+		this.json=json;
+	}
+	
 	public String getLine() {
 		return line;
 	}

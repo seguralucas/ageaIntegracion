@@ -1,0 +1,68 @@
+package exit.services.json;
+
+import java.io.IOException;
+import java.util.HashMap;
+
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+
+import exit.services.excepciones.ExceptionFormatoFecha;
+import exit.services.excepciones.ExceptionLongitud;
+import exit.services.parser.RecuperadorFormato;
+
+public class JsonGenerico extends AbstractJsonRestEstructura{
+	/*************************************/
+	
+	/*************************************/
+
+	/***********************************************/
+	
+	public JsonGenerico() throws IOException {
+		super();
+	}
+	
+	@Override
+	public String alterarValor(String cabecera, String valor) {
+		return null;
+	}
+	
+	@Override
+	public void agregarCampo(String cabecera, String valor) {
+		this.formato=this.formato.replaceAll("#"+cabecera+"#", valor);
+		insertarValorMap(cabecera,valor);
+	}	
+	
+	/**
+	 * Método Exclusivo para debuguear
+	 * @param data
+	 * @throws ParseException
+	 */
+
+	public void mostrar() {
+		System.out.println(this.formato);
+	}
+
+
+	public String getDataJson(){
+		return this.formato;
+	}
+
+	@Override
+	public boolean validarCampos() {
+		return true;
+	}
+
+	@Override
+	public JSONHandler createJson() throws Exception {
+		return new JSONHandler(getLine(),getDataJson());
+	}
+
+	@Override
+	public HashMap<String, String> getMapCabeceraValor() {
+		return mapCabeceraValor;
+	}
+
+
+
+}

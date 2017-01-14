@@ -77,6 +77,14 @@ public class RecuperadorPropiedadedConfiguracionEntidad {
 		return getValueMap("parametroPreEjecutor");
 	}
 	
+	public String getMetodoEjecutor() {
+		return getValueMap("metodoEjecutor")==null?"ejecutorGenerico":getValueMap("metodoEjecutor");
+	}
+
+	public String getParametroEjecutor() {
+		return getValueMap("parametroEjecutor");
+	}
+	
 	public String getUser() {
 		if(getValueMap("user")==null)
 			return RecuperadorPropiedadesConfiguracionGenerales.getInstance().getUser();

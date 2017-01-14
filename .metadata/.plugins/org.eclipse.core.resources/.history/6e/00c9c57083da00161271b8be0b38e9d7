@@ -1,0 +1,32 @@
+package exit.services.procesadorJson;
+
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+
+public class JsonProcesarReemplazo implements IProcesadorJson {
+	private Object valorPorReemplazaR;
+	private String cabeceraPorReemplazar;
+	public  JsonProcesarReemplazo(Object valorPorReemplazaR, String cabeceraPorReemplazar) {
+		this.valorPorReemplazaR=valorPorReemplazaR;
+		this.cabeceraPorReemplazar=cabeceraPorReemplazar;
+	}
+	
+	@Override
+	public void procesarJson(JSONObject json, String keyValue) {
+		Object o= json.get(keyValue);
+		if(o instanceof String){
+			String valor=(String)o;
+			if(valor.equalsIgnoreCase("#"+cabeceraPorReemplazar+"#"))
+				json.put(keyValue, valorPorReemplazaR);
+		}
+	}
+	
+	@Override
+	public void procesarJson(JSONArray json, Integer index) {
+		String valor=(String)json.get(index);
+		if(valor.equalsIgnoreCase("#"+cabeceraPorReemplazar+"#")){
+			json.remove(index);
+			json.add(valorPorReemplazaR);	
+		}
+	}
+}

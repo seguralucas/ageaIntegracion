@@ -1,0 +1,42 @@
+package exit.services.principal;
+
+import java.lang.reflect.Method;
+
+import exit.services.excepciones.ExceptionBiactiva;
+import exit.services.fileHandler.CSVHandler;
+import exit.services.json.JSONHandler;
+import exit.services.singletons.ApuntadorDeEntidad;
+
+public class Ejecutor {
+	
+	public static void ejecutorGenerico(JSONHandler json){
+		
+	}
+	
+	public static void ejecutar(String nombreMetodo) throws ExceptionBiactiva{
+		ApuntadorDeEntidad.getInstance().siguienteEntidad();
+		ejecutar(nombreMetodo,null);
+	}
+		
+	public static Object ejecutar(String nombreMetodo, String parametros) throws ExceptionBiactiva{
+		Class<Ejecutor> a= Ejecutor.class;
+		try {
+			Method m;
+			Object o;
+			if(parametros!=null){
+				m= a.getMethod(nombreMetodo, parametros.getClass());
+				o=m.invoke(null,parametros);
+			}
+			else{
+				m=a.getMethod(nombreMetodo);
+				o=m.invoke(null);
+			}
+			return o;
+		} catch (Exception e) {
+			e.printStackTrace();
+			CSVHandler csv= new CSVHandler();
+			csv.escribirErrorException(e.getStackTrace());
+			throw new ExceptionBiactiva("Error al ejecutar ejecutor");
+		} 
+	}
+}

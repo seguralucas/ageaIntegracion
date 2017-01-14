@@ -1,0 +1,20 @@
+package exit.services.principal;
+
+import exit.services.principal.peticiones.GetIdsAEliminar;
+
+public class PreEjecuciones {
+
+	public static void borrarEntidadRightNow() {
+		int j=0;
+		Integer cantidad=-1;
+		while(cantidad>0 || cantidad==-1){
+			GetIdsAEliminar g= new GetIdsAEliminar();
+			Object o=g.realizarPeticion();
+			if(o instanceof Integer)
+				cantidad=(Integer)o;
+			else
+				cantidad=-777;
+			j++;
+		}
+	}
+}

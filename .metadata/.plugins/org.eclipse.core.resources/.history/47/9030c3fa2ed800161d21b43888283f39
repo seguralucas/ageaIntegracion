@@ -1,0 +1,66 @@
+package exit.services.principal.peticiones;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.PrintWriter;
+
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+
+import exit.services.fileHandler.CSVHandler;
+import exit.services.fileHandler.DirectorioManager;
+import exit.services.principal.Separadores;
+import exit.services.singletons.ApuntadorDeEntidad;
+
+public class GetIdsAEliminar extends GetAbstractoGenerico{
+
+	@Override
+	void procesarPeticionOK(BufferedReader in, Integer id, int responseCode) throws Exception {
+			//NO APLICA		
+	}
+
+	@Override
+	void procesarPeticionError(BufferedReader in, Integer id, int responseCode) throws Exception {
+		// NO APLICA
+		
+	}
+
+	@Override
+	void procesarPeticionOK(BufferedReader in, int responseCode) throws Exception {
+		StringBuilder builder = new StringBuilder();
+		JSONParser parser = new JSONParser();
+		String line;
+        while ((line = in.readLine()) != null) {
+            builder.append(line);
+        }
+        String jsonString = builder.toString();
+		JSONObject jsonObject = (JSONObject) parser.parse(jsonString);
+		JSONArray jsonArrayItems= (JSONArray) jsonObject.get(("items"));
+		JSONObject jsonItem;
+		for(int i=0;i<jsonArrayItems.size();i++){
+			jsonItem=(JSONObject)jsonArrayItems.get(i);
+			String id=(String)jsonItem.get("id");
+			System.out.println();
+		}
+		}
+
+	@Override
+	void procesarPeticionError(BufferedReader in, int responseCode) throws Exception {
+		String path=("error_recuperacion_servidor_codigo_"+responseCode+".txt");
+	    File fichero = DirectorioManager.getDirectorioFechaYHoraInicio(path);
+	    PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(fichero, true)));
+        out.println("No se pudo recuerar informacion de la entidad: "+ApuntadorDeEntidad.getInstance().getEntidadActual());
+        String inputLine;
+        while ((inputLine = in.readLine()) != null) {
+         	out.println(inputLine);
+        }
+        CSVHandler csvHandler = new CSVHandler();
+        csvHandler.escribirCSV("error_recuperacion_servidor_codigo_"+responseCode+".csv", "No se pudo recuerar informacion de la entidad: "+ApuntadorDeEntidad.getInstance().getEntidadActual(),false);            
+        out.println(Separadores.SEPARADOR_ERROR_PETICION);
+        out.close();		
+	}
+
+}

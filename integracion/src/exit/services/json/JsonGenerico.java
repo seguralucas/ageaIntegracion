@@ -12,15 +12,16 @@ public class JsonGenerico extends AbstractJsonRestEstructura{
 	
 	/*************************************/
 
-	/***********************************************/
+	/**
+	 * @throws Exception *********************************************/
 	
-	public JsonGenerico() throws IOException {
+	public JsonGenerico() throws Exception {
 		super();
 	}
 	
 	@Override
-	public String alterarValor(String cabecera, String valor) {
-			switch(RecuperadorPropierdadesJson.getInstancia().getTipo(cabecera)){
+	public Object alterarValor(String cabecera, String valor) {
+		switch(RecuperadorPropierdadesJson.getInstancia().getTipo(cabecera)){
 			case RecuperadorPropierdadesJson.TIPO_FECHA: return procesarFecha(cabecera,valor);
 			case RecuperadorPropierdadesJson.TIPO_ENTERO: return procesarEntero(cabecera,valor);
 			case RecuperadorPropierdadesJson.TIPO_CADENA: return  procesarCadena(cabecera,valor);
@@ -52,11 +53,11 @@ public class JsonGenerico extends AbstractJsonRestEstructura{
 
 	@Override
 	public JSONHandler createJson() throws Exception {
-		return new JSONHandler(getLine(),getDataJson());
+		return new JSONHandler(getLine(),getJsonFormato());
 	}
 
 	@Override
-	public HashMap<String, String> getMapCabeceraValor() {
+	public HashMap<String, Object> getMapCabeceraValor() {
 		return mapCabeceraValor;
 	}
 

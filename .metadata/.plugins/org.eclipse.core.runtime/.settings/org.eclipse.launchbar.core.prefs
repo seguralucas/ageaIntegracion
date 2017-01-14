@@ -1,5 +1,7 @@
-configDescList=org.eclipse.launchbar.core.descriptorType.default\:Test,org.eclipse.launchbar.core.descriptorType.default\:Principal
+configDescList=org.eclipse.launchbar.core.descriptorType.default\:Test,org.eclipse.launchbar.core.descriptorType.default\:Principal,org.eclipse.launchbar.core.descriptorType.default\:RecuperadorPropierdadesJson,org.eclipse.launchbar.core.descriptorType.default\:AbstractJsonRestEstructura,org.eclipse.launchbar.core.descriptorType.default\:RecuperadorPropiedadesConfiguracionGenerales,org.eclipse.launchbar.core.descriptorType.default\:RecuperadorPropiedadedConfiguracionEntidad,org.eclipse.launchbar.core.descriptorType.default\:EliminarGenerico,org.eclipse.launchbar.core.descriptorType.default\:GetIdsAEliminar,org.eclipse.launchbar.core.descriptorType.default\:PreEjecutor,org.eclipse.launchbar.core.descriptorType.default\:Ejecutor,org.eclipse.launchbar.core.descriptorType.default\:RecuperadorFormato,org.eclipse.launchbar.core.descriptorType.default\:ConvertidosJSONCSV
 eclipse.preferences.version=1
+org.eclipse.launchbar.core.descriptorType.default\:AbstractJsonRestEstructura/activeLaunchMode=run
+org.eclipse.launchbar.core.descriptorType.default\:AbstractJsonRestEstructura/activeLaunchTarget=org.eclipse.remote.LocalServices\:Local
 org.eclipse.launchbar.core.descriptorType.default\:Principal/activeLaunchMode=run
 org.eclipse.launchbar.core.descriptorType.default\:Principal/activeLaunchTarget=org.eclipse.remote.LocalServices\:Local
 org.eclipse.launchbar.core.descriptorType.default\:Test/activeLaunchMode=run

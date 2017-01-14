@@ -8,3 +8,57 @@
 1483977123549	Delete element
 1483977543875	Delete element
 1483985136074	Rename method 'getJson'
+1483992806304	Rename field 'data'
+1483992819500	Rename method 'getData'
+1483993153884	Delete element
+1483993155384	Delete element
+1483993156737	Delete element
+1483994265953	Delete element
+1484066271481	Delete element
+1484066541702	Delete element
+1484066593063	Delete element
+1484070356345	Delete element
+1484071650091	Rename resource 'formatoJson.json'
+1484071659134	Rename resource 'tiposDeDatos.json'
+1484072803113	Copy file
+1484072994049	Move 2 resources to 'contacto'
+1484073000823	Rename resource 'formatoJsonContacto.json'
+1484073008191	Rename resource 'tiposDeDatosContacto.json'
+1484073020884	Move 'sucursales' to 'WebContent'
+1484073028288	Copy files
+1484073058258	Rename field 'archivoConfiguracion'
+1484073094852	Delete element
+1484073106306	Delete element
+1484079664641	Delete element
+1484080056354	Copy files
+1484147948879	Copy file
+1484147950351	Copy file
+1484147963726	Rename resource 'ConfiguracionConexion.properties'
+1484150307054	Rename type 'RecuperadorPropiedadConfiguracion'
+1484151251756	Rename method 'getDirectoriosDeConfiguracion'
+1484151280461	Rename resource 'ConfiguracionConexion.properties'
+1484151290659	Rename resource 'ConfiguracionConexion.properties'
+1484155043763	Rename type 'RecuperadorPropiedadConfiguracionEntidad'
+1484155930402	Copy file
+1484156124016	Delete element
+1484156128195	Copy compilation unit
+1484156148734	Delete element
+1484156258027	Rename package 'exit.services.parser'
+1484156372676	Rename method 'getCSVAProcesar'
+1484230729673	Move compilation unit
+1484230740558	Move compilation unit
+1484231959572	Delete element
+1484232108649	Delete element
+1484232429751	Delete element
+1484235052008	Rename resource 'WebContent'
+1484235064712	Delete elements
+1484235147097	Rename type 'Separadores'
+1484328578890	Rename type 'EjecutorInsercionIncidentesDistintosFicheros'
+1484328900020	Rename type 'PreEjecuciones'
+1484331242359	Copy files
+1484331808155	Copy files
+1484332812674	Copy files
+1484413112385	Rename type 'ConvertidorResultadoHTTPAJson'
+1484414138807	Rename type 'ProcesadorJson'
+1484415952257	Rename type 'ProcesarReemplazo'
+1484418642302	Delete element

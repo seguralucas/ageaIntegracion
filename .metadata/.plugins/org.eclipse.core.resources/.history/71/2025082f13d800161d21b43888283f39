@@ -1,0 +1,11 @@
+package exit.services.parser;
+
+public class ApuntadorDeEntidad {
+
+	private static ApuntadorDeEntidad instance;
+	
+    public static synchronized ApuntadorDeEntidad getInstance() {
+    	if(instance==null)
+    		instance=new ApuntadorDeEntidad();
+    	return instance;
+    }}

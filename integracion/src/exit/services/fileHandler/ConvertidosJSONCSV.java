@@ -49,6 +49,7 @@ public class ConvertidosJSONCSV{
     			return jsonEstructura;
   				}
   				catch(Exception e){
+  					e.printStackTrace();
   					csv.escribirCSV("error_parser.csv", line,true);
   					return null;
   				}
@@ -65,7 +66,7 @@ public class ConvertidosJSONCSV{
  			return null;
 	   }
 			   
-	   public AbstractJsonRestEstructura crearJson(String[] valoresCsv, String[] cabeceras) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException, ClassNotFoundException, IOException{
+	   public AbstractJsonRestEstructura crearJson(String[] valoresCsv, String[] cabeceras) throws Exception{
 		   AbstractJsonRestEstructura restEstructura= new JsonGenerico();
 		   for(int i=0;i<valoresCsv.length;i++){
 			   restEstructura.agregarCampo(cabeceras[i], valoresCsv[i]);
@@ -82,6 +83,5 @@ public class ConvertidosJSONCSV{
 	   public boolean isFin() {
 		return fin;
 	}
-
 
 }

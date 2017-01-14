@@ -1,0 +1,9 @@
+package exit.services.principal.peticiones;
+
+import java.io.BufferedReader;
+
+public interface IPeticionEntidad {
+	public Object realizarPeticion(String url);
+	 Object procesarPeticionOK(BufferedReader in, Long id,int responseCode) throws Exception;
+	 Object procesarPeticionError(BufferedReader in, Long id, int responseCode) throws Exception;
+}

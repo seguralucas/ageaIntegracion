@@ -1,0 +1,36 @@
+package exit.services.parser;
+
+
+
+public class ApuntadorDeEntidad {
+	private String[] entidades;
+	private int puntero;
+	private static ApuntadorDeEntidad instance;
+	private ApuntadorDeEntidad(){
+		entidades= RecuperadorPropiedadesConfiguracionGenerales.getInstance().getDirectoriosDeConfiguracion().split(",");
+		puntero=0;
+	}
+    public static synchronized ApuntadorDeEntidad getInstance() {
+    	if(instance==null)
+    		instance=new ApuntadorDeEntidad();
+    	return instance;
+    }
+    
+    public String getEntidadActual(){
+    	if(puntero>=entidades.length)
+    		return null;
+    	return entidades[puntero];
+    }
+    
+    public boolean hasNext(){
+    	return (puntero+1)<entidades.length;
+    }
+    
+    public boolean siguienteEntidad(){
+    	if(puntero>=entidades.length)
+    		return false;
+    	puntero++;
+    	return true;
+    	
+    }
+}

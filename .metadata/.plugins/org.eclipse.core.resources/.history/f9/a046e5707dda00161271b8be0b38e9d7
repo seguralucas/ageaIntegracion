@@ -1,0 +1,16 @@
+package exit.services.procesadorJson;
+
+
+public class ProcesarReemplazo implements IProcesadorJson {
+	private String valorPorReemplazaR;
+	
+	public public ProcesarReemplazo() {
+		
+	}
+	
+	@Override
+	public void procesarJson(String cabecera, String valor) {
+		
+	}
+
+}

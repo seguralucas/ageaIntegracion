@@ -8,7 +8,7 @@ import java.lang.management.ManagementFactory;
 import org.json.simple.parser.ParseException;
 
 import exit.services.fileHandler.DirectorioManager;
-import exit.services.principal.ejecutores.EjecutorInsercionIncidentesDistintosFicheros;
+import exit.services.principal.ejecutores.ParalelizadorDistintosFicheros;
 import exit.services.singletons.ApuntadorDeEntidad;
 import exit.services.singletons.RecuperadorPropiedadedConfiguracionEntidad;
 
@@ -26,10 +26,10 @@ public class Principal {
     	time_start = System.currentTimeMillis();
     	while(ApuntadorDeEntidad.getInstance().siguienteEntidad()){
 	    	RecuperadorPropiedadedConfiguracionEntidad.getInstance().mostrarConfiguracion();
-    		EjecutorInsercionIncidentesDistintosFicheros hiloApartre = new EjecutorInsercionIncidentesDistintosFicheros();
+    		ParalelizadorDistintosFicheros hiloApartre = new ParalelizadorDistintosFicheros();
 	      	try {
 	      		if(RecuperadorPropiedadedConfiguracionEntidad.getInstance().getMetodoPreEjecutor()!=null)
-	      			PreEjecuciones.ejecutar(RecuperadorPropiedadedConfiguracionEntidad.getInstance().getMetodoPreEjecutor(), RecuperadorPropiedadedConfiguracionEntidad.getInstance().getParametroPreEjecutor());
+	      			PreEjecutor.ejecutar(RecuperadorPropiedadedConfiguracionEntidad.getInstance().getMetodoPreEjecutor(), RecuperadorPropiedadedConfiguracionEntidad.getInstance().getParametroPreEjecutor());
 	      		hiloApartre.insertar();
 			} catch (Exception e) {
 				e.printStackTrace();

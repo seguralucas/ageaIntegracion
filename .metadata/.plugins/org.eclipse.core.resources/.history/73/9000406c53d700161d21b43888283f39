@@ -1,0 +1,88 @@
+package exit.services.parser;
+
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.Properties;
+
+public class RecuperadorPropiedadConfiguracion {
+	private String pathCSVRegistros;
+	private String url;
+	private String user;
+	private String password;
+	private String separadorCSV;
+	private int nivelParalelismo;
+	private String usaProxy;
+	private String ipProxy;
+	private String puertoProxy;
+	private String action;
+	
+	private static RecuperadorPropiedadConfiguracion instance;
+    private RecuperadorPropiedadConfiguracion(){
+        Properties props = new Properties();
+		props.load(new FileReader("WebContent/ConfiguracionConexion.properties"));
+		pathCSVRegistros=props.getProperty("pathCSVRegistros");
+		user=props.getProperty("user");
+		password=props.getProperty("password");
+		separadorCSV=props.getProperty("separadorCSV");
+		nivelParalelismo=Integer.parseInt(props.getProperty("nivelParalelismo"));
+		usaProxy=props.getProperty("usaProxy");
+		ipProxy=props.getProperty("ipProxy");
+		puertoProxy=props.getProperty("puertoProxy");
+		action=props.getProperty("action");
+    }
+    
+    public static synchronized RecuperadorPropiedadConfiguracion getInstance() throws IOException{
+    	if(instance==null)
+    		instance=new RecuperadorPropiedadConfiguracion();
+    	return instance;
+    }
+
+	public String getPathCSVRegistros() {
+		return pathCSVRegistros;
+	}
+
+	public String getUrl() {
+		return url;
+	}
+
+	public String getUser() {
+		return user;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public String getSeparadorCSV() {
+		return separadorCSV;
+	}
+	
+	public String getSeparadorCSVREGEX() {
+		return "\\"+separadorCSV;
+	}
+
+	public int getNivelParalelismo() {
+		return nivelParalelismo;
+	}
+
+	public String getUsaProxy() {
+		return usaProxy;
+	}
+
+	public String getIpProxy() {
+		return ipProxy;
+	}
+
+	public String getPuertoProxy() {
+		return puertoProxy;
+	}
+	public String getAction() {
+		return action;
+	}
+	
+
+	
+
+
+
+}

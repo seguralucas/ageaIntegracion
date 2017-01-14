@@ -1,0 +1,7 @@
+package exit.services.procesadorJson;
+
+import org.json.simple.JSONObject;
+
+public interface IProcesadorJson {
+	void procesarJson(JSONObject json, String keyValue);
+}

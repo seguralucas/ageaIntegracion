@@ -1,0 +1,10 @@
+package exit.services.principal.peticiones;
+
+import java.io.BufferedReader;
+
+public abstract class AbstractPeticion {
+	abstract public Object realizarPeticion(String url);
+	abstract public Object realizarPeticion();
+	abstract protected Object procesarPeticionOK(BufferedReader in, Long id,int responseCode) throws Exception;
+	abstract protected Object procesarPeticionError(BufferedReader in, Long id, int responseCode) throws Exception;
+}

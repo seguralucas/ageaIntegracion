@@ -37,14 +37,7 @@ public class GetIdsAEliminar extends GetAbstractoGenerico{
 
 	@Override
 	protected Object procesarPeticionOK(BufferedReader in, int responseCode) throws Exception {
-		StringBuilder builder = new StringBuilder();
-		JSONParser parser = new JSONParser();
-		String line;
-        while ((line = in.readLine()) != null) {
-            builder.append(line);
-        }
-        String jsonString = builder.toString();
-		JSONObject jsonObject = (JSONObject) parser.parse(jsonString);
+		JSONObject jsonObject = ConvertidorJson.convertir(in);
 		JSONArray jsonArrayItems= (JSONArray) jsonObject.get(("items"));
 		EliminarGenerico e= new EliminarGenerico();
 		System.out.println(jsonArrayItems.size());

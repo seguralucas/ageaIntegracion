@@ -1,0 +1,114 @@
+package exit.services.parser;
+
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Properties;
+
+import exit.services.fileHandler.CSVHandler;
+import exit.services.fileHandler.DirectorioManager;
+
+public class RecuperadorPropiedadConfiguracionEntidad {
+	HashMap<String, String> mapPropiedades;
+	private static RecuperadorPropiedadConfiguracionEntidad instance;
+    private RecuperadorPropiedadConfiguracionEntidad(){
+    	mapPropiedades=new HashMap<String,String>();
+        Properties props = new Properties();
+        try{
+		props.load(new FileReader("WebContent/"+ApuntadorDeEntidad.getInstance().getEntidadActual()+"/ConfiguracionGeneral.properties"));
+		for(String key : props.stringPropertyNames()) 
+			  mapPropiedades.put(key, props.getProperty(key));
+        }
+        catch(Exception e){
+        	e.printStackTrace();
+        	try {
+        		e.printStackTrace();
+				FileWriter fw= new FileWriter(DirectorioManager.getDirectorioFechaYHoraInicio("error.txt"));
+				fw.write("Error al recuperar las propierdades del fichero: ConfiguracionGeneral.properties");
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+        }
+    }
+    
+    void reiniciar(){
+    	instance=null;
+    }
+    
+	public void mostrarConfiguracion(){
+    	System.out.println("Directorio de busqueda: "+RecuperadorPropiedadConfiguracionEntidad.getInstance().getPathCSVRegistros());
+    	System.out.println("URL: "+RecuperadorPropiedadConfiguracionEntidad.getInstance().getUrl());
+    	System.out.println("Usuario: "+RecuperadorPropiedadConfiguracionEntidad.getInstance().getUser());
+    	System.out.println("Password: "+RecuperadorPropiedadConfiguracionEntidad.getInstance().getPassword());
+    	System.out.println("Acción: "+RecuperadorPropiedadConfiguracionEntidad.getInstance().getAction());
+    	System.out.println("Nivel de paralelismo: "+RecuperadorPropiedadConfiguracionEntidad.getInstance().getNivelParalelismo());
+    	System.out.println("Usa Proxy: "+RecuperadorPropiedadConfiguracionEntidad.getInstance().getUsaProxy());
+    	if(RecuperadorPropiedadConfiguracionEntidad.getInstance().getUsaProxy().equalsIgnoreCase("si")){
+        	System.out.println("IP Proxy: "+RecuperadorPropiedadConfiguracionEntidad.getInstance().getIpProxy());
+    		System.out.println("Puerto Proxy: "+RecuperadorPropiedadConfiguracionEntidad.getInstance().getPuertoProxy());
+    	}  	
+    	System.out.println("Identificador de Atributo: "+RecuperadorPropiedadConfiguracionEntidad.getInstance().getIdentificadorAtributo());
+	}
+    
+    public static synchronized RecuperadorPropiedadConfiguracionEntidad getInstance() {
+    	if(instance==null)
+    		instance=new RecuperadorPropiedadConfiguracionEntidad();
+    	return instance;
+    }
+
+    private String getValueMap(String key){
+    	return mapPropiedades.get(key);
+    }
+	public String getPathCSVRegistros() {
+		return getValueMap("pathCSVRegistros");
+	}
+
+	public String getUrl() {
+		return getValueMap("url");
+	}
+
+	public String getUser() {
+		return getValueMap("user");
+	}
+
+	public String getPassword() {
+		return getValueMap("password");
+	}
+
+	public String getSeparadorCSV() {
+		return getValueMap("separadorCSV");
+	}
+	
+	public String getSeparadorCSVREGEX() {
+		return "\\"+getValueMap("separadorCSV");
+	}
+
+	public int getNivelParalelismo() {
+		return Integer.parseInt(getValueMap("nivelParalelismo"));
+	}
+
+	public String getUsaProxy() {
+		return getValueMap("usaProxy");
+	}
+
+	public String getIpProxy() {
+		return getValueMap("ipProxy");
+	}
+
+	public String getPuertoProxy() {
+		return getValueMap("puertoProxy");
+	}
+	public String getAction() {
+		return getValueMap("action");
+	}
+
+	public String getIdentificadorAtributo() {
+		return getValueMap("identificadorAtributo");
+	}
+	
+	public static void main(String[] args) {
+		getInstance().mostrarConfiguracion();
+	}
+
+}

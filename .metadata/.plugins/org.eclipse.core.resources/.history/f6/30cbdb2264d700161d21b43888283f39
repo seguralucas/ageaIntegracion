@@ -1,0 +1,13 @@
+pathCSVRegistros=D\:/Exit
+url=https://help365.custhelp.com/services/rest/connect/v1.3/contacts
+user=lucas.segura
+password=Lucas123
+separadorCSV=;
+usaProxy=NO
+ipProxy=10.152.140.252
+puertoProxy=8080
+directorioConfiguracion=sucursales
+
+
+action=GENERICA
+nivelParalelismo=10

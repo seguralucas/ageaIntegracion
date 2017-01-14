@@ -1,0 +1,5 @@
+package exit.services.parser;
+
+public class RecuperadorPropiedadConfiguracion {
+
+}

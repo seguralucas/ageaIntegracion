@@ -1,0 +1,17 @@
+package exit.services.procesadorJson;
+
+import org.json.simple.JSONObject;
+
+public class ProcesarReemplazo implements IProcesadorJson {
+	private String valorPorReemplazaR;
+	
+	public  ProcesarReemplazo(String valorPorReemplazaR) {
+		this.valorPorReemplazaR=valorPorReemplazaR;
+	}
+	
+	@Override
+	public void procesarJson(JSONObject json, String keyValue) {
+		
+	}
+
+}

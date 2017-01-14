@@ -18,6 +18,7 @@ public class RecuperadorPropierdadesJson {
 	private JSONObject jsonPropiedades;
 	private HashMap<String, JSONObject> mapCabeceraJson;
 	public static final String PROPIEDAD_TIPO="tipo";
+	public static final String PROPIEDAD_BORRAR_SI_ES_NULL="borrarSiEsNull";
 	public static final String PROPIEDAD_BORRAR_CAR_NO_NUMERICOS="borrarCarNoNumericos";
 	public static final String TIPO_FECHA="fecha";
 	public static final String TIPO_ENTERO="entero";
@@ -77,6 +78,18 @@ public class RecuperadorPropierdadesJson {
 		JSONObject j= RecuperadorPropierdadesJson.getInstancia().getPropiedades(key);
 		Object aux=j==null?null:j.get(PROPIEDAD_BORRAR_CAR_NO_NUMERICOS);
 		return aux==null?false:(Boolean)j.get(PROPIEDAD_BORRAR_CAR_NO_NUMERICOS);
+	}
+	
+	public String getBorrarSiEsNull(String key){
+		JSONObject j= RecuperadorPropierdadesJson.getInstancia().getPropiedades(key);
+		String aux=j==null?null:(String)j.get(PROPIEDAD_BORRAR_SI_ES_NULL);
+		return aux;
+		}
+	
+	public boolean isBorrarSiEsNull(String key){
+		JSONObject j= RecuperadorPropierdadesJson.getInstancia().getPropiedades(key);
+		Object aux=j==null?null:j.get(PROPIEDAD_BORRAR_SI_ES_NULL);
+		return aux!=null;
 	}
 	
 	public JSONObject getJsonPropiedades() {

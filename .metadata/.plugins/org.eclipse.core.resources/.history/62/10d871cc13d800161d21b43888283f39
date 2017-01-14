@@ -1,0 +1,24 @@
+package exit.services.parser;
+
+
+
+public class ApuntadorDeEntidad {
+	private String[] entidades;
+	private int puntero;
+	private static ApuntadorDeEntidad instance;
+	private ApuntadorDeEntidad(){
+		entidades= RecuperadorPropiedadesConfiguracionGenerales.getInstance().getAction().split(",");
+		puntero=0;
+	}
+    public static synchronized ApuntadorDeEntidad getInstance() {
+    	if(instance==null)
+    		instance=new ApuntadorDeEntidad();
+    	return instance;
+    }
+    
+    public String getEntidadActual(){
+    	if(i>=entidades.length)
+    		return null
+    	return entidades[i];
+    }
+}

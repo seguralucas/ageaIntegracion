@@ -3,29 +3,37 @@ package exit.services.json;
 import java.io.IOException;
 import java.util.HashMap;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+
 import exit.services.fileHandler.CSVHandler;
+import exit.services.fileHandler.ConstantesGenerales;
+import exit.services.procesadorJson.IProcesadorJson;
+import exit.services.procesadorJson.JsonProcesarReemplazo;
 import exit.services.singletons.RecuperadorFormato;
 import exit.services.singletons.RecuperadorPropierdadesJson;
 
 public abstract class AbstractJsonRestEstructura {
 	protected String line;
 	protected String dataJson;
-	protected HashMap<String, String> mapCabeceraValor;
+	protected JSONObject jsonFormato;
+	protected HashMap<String, Object> mapCabeceraValor;
 
 	abstract public void agregarCampo(String cabecera, String valor);
 	abstract public boolean validarCampos();
 	abstract public JSONHandler createJson() throws Exception;
-	abstract protected String alterarValor(String cabecera, String valor);
+	abstract protected Object alterarValor(String cabecera, String valor);
 	
 
 	
-	public AbstractJsonRestEstructura() throws IOException {
+	public AbstractJsonRestEstructura() throws Exception {
 		super();
 		this.dataJson=RecuperadorFormato.getInstancia().getFormato();
-		mapCabeceraValor= new HashMap<String, String>();
+		this.jsonFormato=RecuperadorFormato.getInstancia().getJsonFormato();
+		mapCabeceraValor= new HashMap<String, Object>();
 	}
 	
-	public HashMap<String, String> getMapCabeceraValor(){
+	public HashMap<String, Object> getMapCabeceraValor(){
 		return mapCabeceraValor;
 	}
 	
@@ -34,9 +42,40 @@ public abstract class AbstractJsonRestEstructura {
 	} 
 	
 	protected void insertarValorJson(String cabecera, String valor){ 
-		this.dataJson=this.dataJson.replaceAll("#"+cabecera+"#", alterarValor(cabecera,valor));
+		Object valorAlterado=alterarValor(cabecera,valor);
+		//this.dataJson=this.dataJson.replaceAll("#"+cabecera+"#", alterarValor(cabecera,valor));
+		if(valorAlterado==null && RecuperadorPropierdadesJson.getInstancia().isBorrarSiEsNull(cabecera))
+			borrarKey(cabecera);
+		else{
+		JsonProcesarReemplazo jpr= new JsonProcesarReemplazo(valorAlterado,cabecera);
+		recorrerJSON(this.jsonFormato,jpr);
+		}
 	}
 	
+	protected void recorrerJSON(JSONObject jsonObj, IProcesadorJson procesadorJson ) {
+	    for (Object key : jsonObj.keySet()) {
+	        String keyStr = (String)key;
+	        Object keyvalue = jsonObj.get(keyStr);
+	        if (keyvalue instanceof JSONObject)
+	        	recorrerJSON((JSONObject)keyvalue,procesadorJson);
+	        else if(keyvalue instanceof JSONArray)
+	        	recorrerJSON((JSONArray)keyvalue,procesadorJson);
+	        else
+	        	procesadorJson.procesarJson(jsonObj, keyStr);
+	        }
+	}
+	
+	protected void recorrerJSON(JSONArray jsonArr, IProcesadorJson procesadorJson ){
+		for(int i=0;i<jsonArr.size();i++){
+			Object value=jsonArr.get(i);
+	        if (value instanceof JSONObject)
+	        	recorrerJSON((JSONObject)value,procesadorJson);
+	        else if(value instanceof JSONArray)
+	        	recorrerJSON((JSONArray)value,procesadorJson);
+		    else
+	        	procesadorJson.procesarJson(jsonArr, i);
+		}
+	}
 	
 	protected Boolean insertarTrueOFalse(String valor){
 		if(valor == null)
@@ -58,7 +97,7 @@ public abstract class AbstractJsonRestEstructura {
 		String[] fecha=valor.split("/");
 		if(fecha.length==3){
 			try{
-				return fecha[2]+"-"+fecha[1]+"-"+fecha[0];
+				return fecha[2]+"-"+fecha[0]+"-"+fecha[1];
 			}
 			catch(Exception e){
 				try {
@@ -74,27 +113,59 @@ public abstract class AbstractJsonRestEstructura {
 			return null;
 		else
 			return valor;
-
 	}
+	
+	protected void borrarKey(String cabecera){
+		try{
+		if(RecuperadorPropierdadesJson.getInstancia().isBorrarSiEsNull(cabecera)){
+			String[] recorrido=RecuperadorPropierdadesJson.getInstancia().getBorrarSiEsNull(cabecera).split("\\.");
+			JSONObject aux= this.jsonFormato;
+			for(int i=0;i<recorrido.length;i++){
+				if(i+1==recorrido.length)
+					aux.remove(recorrido[i]);
+				else
+					aux=(JSONObject)aux.get(recorrido[i]);
+			}
+		}
+		}
+		catch(Exception e){
+			e.printStackTrace();
+			CSVHandler csv= new CSVHandler();
+			try{
+				csv.escribirCSV("error_borrar_key.txt", "Error al intentar eliminar llave por valor nulo");
+				csv.escribirCSV("error_borrar_key.txt", "Elemento causante: "+cabecera);
+				csv.escribirCSV("error_borrar_key.txt", "Valor: "+RecuperadorPropierdadesJson.getInstancia().getBorrarSiEsNull(cabecera));
+				csv.escribirCSV("error_borrar_key.txt", "Operacion sobre el registro no detenida");
+				csv.escribirCSV("error_borrar_key.txt", ConstantesGenerales.SEPARADOR_ERROR_TRYCATCH);
+			}
+			catch(Exception a){
+				a.printStackTrace();
+			}
+		}
+	}
+	
 	protected String insertarString(String valor){
-		
 		if(valor == null || valor.length()==0)
 			return null;
 		return valor;
 	}
 	
 	protected String procesarFecha(String cabecera, String valor){
-		return "\""+insertarFecha(valor)+"\"";
+		return insertarFecha(valor);
 	}
 	
 	protected String procesarCadena(String cabecera, String valor){
-		return "\""+valor+"\"";
+		if(valor==null || valor.length()==0)
+			return null;
+		return valor;
 	}
 	
-	protected String procesarEntero(String cabecera, String valor){
+	protected Integer procesarEntero(String cabecera, String valor){
 		if(RecuperadorPropierdadesJson.getInstancia().isBorrarCarNoNumericos(cabecera))
-			return valor.replaceAll("[^0-9]", "");
-		return valor;
+			valor=valor.replaceAll("[^0-9]", "");
+		if(valor==null || valor.length()==0)
+			return null;
+		return Integer.parseInt(valor);
 	}
 	
 	
@@ -108,6 +179,11 @@ public abstract class AbstractJsonRestEstructura {
 	public String getDataJson(){
 		return dataJson;
 	}
+	public JSONObject getJsonFormato() {
+		return jsonFormato;
+	}
+	
+	
 	
 	
 }
