@@ -82,7 +82,7 @@ public abstract class AbstractJsonRestEstructura {
 			return null;
 		if (valor.equalsIgnoreCase("si") || valor.equalsIgnoreCase("true") || valor.equalsIgnoreCase("verdadero"))
 			return true;
-		else if(valor.equalsIgnoreCase("no") || valor.equalsIgnoreCase("false") || valor.equalsIgnoreCase("false"))
+		else if(valor.equalsIgnoreCase("no") || valor.equalsIgnoreCase("false") || valor.equalsIgnoreCase("falso"))
 			return false;
 		else 
 			return null;
@@ -115,16 +115,33 @@ public abstract class AbstractJsonRestEstructura {
 			return valor;
 	}
 	
+	public static void main(String[] args) {
+		String a="addres[1]";
+		System.out.println(a.substring(0, a.length()-3));
+	}
+	
 	protected void borrarKey(String cabecera){
 		try{
 		if(RecuperadorPropierdadesJson.getInstancia().isBorrarSiEsNull(cabecera)){
 			String[] recorrido=RecuperadorPropierdadesJson.getInstancia().getBorrarSiEsNull(cabecera).split("\\.");
 			JSONObject aux= this.jsonFormato;
+			JSONArray auxArray;
 			for(int i=0;i<recorrido.length;i++){
-				if(i+1==recorrido.length)
-					aux.remove(recorrido[i]);
-				else
+				if(i+1==recorrido.length){
+					if(recorrido[i].matches(".*\\[[0-9]\\]$")){
+						auxArray=(JSONArray)aux.get(recorrido[i].substring(0, recorrido[i].length()-3));
+						auxArray.remove(Character.getNumericValue(recorrido[i].charAt(recorrido[i].length() - 2)));
+					}
+					else
+						aux.remove(recorrido[i]);
+				}
+				else{
 					aux=(JSONObject)aux.get(recorrido[i]);
+					if(recorrido[i].matches(".*\\[[0-9]\\]$")){
+						auxArray=(JSONArray)aux.get(recorrido[i].substring(0, recorrido[i].length()-3));
+						aux.get(Character.getNumericValue(recorrido[i].charAt(recorrido[i].length() - 2)));
+					}
+				}
 			}
 		}
 		}

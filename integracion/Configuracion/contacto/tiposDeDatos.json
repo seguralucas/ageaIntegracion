@@ -13,7 +13,7 @@
 },
 "EMAIL":{
 "tipo":"cadena",
-"borrarSiEsNull":"emails"
+"borrarSiEsNull":"emails[0]"
 },
 "ESTADO_CIVIL":{
 "tipo":"cadena"

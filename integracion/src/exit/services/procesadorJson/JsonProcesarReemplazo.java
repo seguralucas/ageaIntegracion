@@ -4,6 +4,7 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import exit.services.singletons.RecuperadorPropiedadedConfiguracionEntidad;
+import exit.services.singletons.RecuperadorPropierdadesJson;
 
 public class JsonProcesarReemplazo implements IProcesadorJson {
 	private Object valorPorReemplazaR;
@@ -19,7 +20,11 @@ public class JsonProcesarReemplazo implements IProcesadorJson {
 		if(o instanceof String){
 			String identificador=RecuperadorPropiedadedConfiguracionEntidad.getInstance().getIdentificadorAtributo();
 			String valor=(String)o;
-			if(valor.equalsIgnoreCase(identificador+cabeceraPorReemplazar+identificador))
+			if(RecuperadorPropierdadesJson.getInstancia().getTipo(cabeceraPorReemplazar).equalsIgnoreCase(RecuperadorPropierdadesJson.TIPO_CADENA)){
+				if(valor.contains(identificador+cabeceraPorReemplazar+identificador))
+					json.put(keyValue, valor.replaceAll(identificador+cabeceraPorReemplazar+identificador, (String)valorPorReemplazaR));				
+			}
+			else if(valor.equalsIgnoreCase(identificador+cabeceraPorReemplazar+identificador))
 				json.put(keyValue, valorPorReemplazaR);
 		}
 	}
@@ -30,7 +35,13 @@ public class JsonProcesarReemplazo implements IProcesadorJson {
 		if(o instanceof String){
 			String identificador=RecuperadorPropiedadedConfiguracionEntidad.getInstance().getIdentificadorAtributo();
 			String valor=(String)json.get(index);
-			if(valor.equalsIgnoreCase(identificador+cabeceraPorReemplazar+identificador)){
+			if(RecuperadorPropierdadesJson.getInstancia().getTipo(cabeceraPorReemplazar).equalsIgnoreCase(RecuperadorPropierdadesJson.TIPO_CADENA)){
+				if(valor.matches(identificador+cabeceraPorReemplazar+identificador)){
+					json.remove(index);
+					json.add(index, valor.replaceAll(identificador+cabeceraPorReemplazar+identificador, (String)valorPorReemplazaR));				
+				}
+			}
+			else if(valor.equalsIgnoreCase(identificador+cabeceraPorReemplazar+identificador)){
 				json.remove(index);
 				json.add(valorPorReemplazaR);	
 			}

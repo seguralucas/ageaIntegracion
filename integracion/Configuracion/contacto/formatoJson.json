@@ -1,5 +1,5 @@
 { 
-    "emails":{"address":"#EMAIL#", "addressType":{"id":0}},
+    "emails":[{"address":"#EMAIL#", "addressType":{"id":0}},{"address":"#BP_SAP_ID#@no.contactar", "addressType":{"id":1}}],
     "phones":{"number":"#TELEFONO#","phoneType":{"id":0}},
 "customFields": {
         "CO": {

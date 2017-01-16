@@ -1,0 +1,9 @@
+FileName: JSONParser.java Metodo: parseClase org.json.simple.parser.JSONParser Linea 257
+FileName: JSONParser.java Metodo: parseClase org.json.simple.parser.JSONParser Linea 81
+FileName: JSONParser.java Metodo: parseClase org.json.simple.parser.JSONParser Linea 75
+FileName: ConvertidorJson.java Metodo: convertirClase exit.services.principal.peticiones.ConvertidorJson Linea 22
+FileName: RecuperadorFormato.java Metodo: <init>Clase exit.services.singletons.RecuperadorFormato Linea 40
+FileName: RecuperadorFormato.java Metodo: getInstanciaClase exit.services.singletons.RecuperadorFormato Linea 27
+FileName: ApuntadorDeEntidad.java Metodo: siguienteEntidadClase exit.services.singletons.ApuntadorDeEntidad Linea 34
+FileName: Principal.java Metodo: mainClase exit.services.principal.Principal Linea 27
+---------------------------------------------------------------------

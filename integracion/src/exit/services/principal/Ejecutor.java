@@ -18,6 +18,7 @@ public class Ejecutor {
 		JSONHandler jsonH;
 			try{
 				jsonH=jsonEst.createJson();
+				System.out.println(jsonH.toStringNormal());
 				InsertarAbstractoEntidades insertar= new InsertarGenerico();
 				insertar.realizarPeticion(jsonH);
 			}

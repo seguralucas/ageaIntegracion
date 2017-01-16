@@ -1,16 +1,37 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
 <fullyQualifiedTypeName name="java.io.File"/>
-<fullyQualifiedTypeName name="java.io.BufferedReader"/>
 <fullyQualifiedTypeName name="java.io.FileReader"/>
 <fullyQualifiedTypeName name="java.lang.StringBuilder"/>
 <fullyQualifiedTypeName name="exit.services.json.RecuperadorFormato"/>
-<fullyQualifiedTypeName name="exit.services.json.JsonGenerico"/>
-<fullyQualifiedTypeName name="exit.services.excepciones.ExceptionBiactiva"/>
 <fullyQualifiedTypeName name="exit.services.json.IJsonRestEstructura"/>
 <fullyQualifiedTypeName name="org.json.simple.parser.JSONParser"/>
-<fullyQualifiedTypeName name="java.util.HashMap"/>
-<fullyQualifiedTypeName name="org.json.simple.JSONArray"/>
-<fullyQualifiedTypeName name="org.json.simple.JSONObject"/>
 <fullyQualifiedTypeName name="exit.services.parser.RecuperadorPropierdadesJson"/>
+<fullyQualifiedTypeName name="exit.services.json.AbstractJsonRestEstructura"/>
+<fullyQualifiedTypeName name="exit.services.json.JSONHandler"/>
+<fullyQualifiedTypeName name="java.io.BufferedReader"/>
+<fullyQualifiedTypeName name="exit.services.excepciones.ExceptionBiactiva"/>
+<fullyQualifiedTypeName name="exit.services.json.JsonGenerico"/>
+<fullyQualifiedTypeName name="exit.services.principal.Ejecutor"/>
+<fullyQualifiedTypeName name="java.awt.List"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="java.util.List"/>
+<fullyQualifiedTypeName name="java.util.HashMap"/>
+<fullyQualifiedTypeName name="exit.services.principal.peticiones.ConvertidorResultadoHTTPAJson"/>
+<fullyQualifiedTypeName name="exit.services.principal.peticiones.ConvertidorJson"/>
+<fullyQualifiedTypeName name="exit.services.singletons.ApuntadorDeEntidad"/>
+<fullyQualifiedTypeName name="javax.swing.tree.VariableHeightLayoutCache"/>
+<fullyQualifiedTypeName name="exit.services.singletons.RecuperadorFormato"/>
+<fullyQualifiedTypeName name="exit.services.procesadorJson.IProcesadorJson"/>
+<fullyQualifiedTypeName name="org.json.simple.JSONArray"/>
+<fullyQualifiedTypeName name="exit.services.procesadorJson.ProcesarReemplazo"/>
+<fullyQualifiedTypeName name="exit.services.procesadorJson.JsonProcesarReemplazo"/>
+<fullyQualifiedTypeName name="java.lang.Object"/>
+<fullyQualifiedTypeName name="java.lang.Integer"/>
+<fullyQualifiedTypeName name="exit.services.singletons.RecuperadorPropierdadesJson"/>
+<fullyQualifiedTypeName name="exit.services.fileHandler.CSVHandler"/>
+<fullyQualifiedTypeName name="java.lang.Exception"/>
+<fullyQualifiedTypeName name="exit.services.fileHandler.ConstantesGenerales"/>
+<fullyQualifiedTypeName name="org.json.simple.JSONObject"/>
+<fullyQualifiedTypeName name="exit.services.singletons.RecuperadorPropiedadedConfiguracionEntidad"/>
 </qualifiedTypeNameHistroy>
