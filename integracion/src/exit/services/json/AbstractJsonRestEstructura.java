@@ -115,10 +115,7 @@ public abstract class AbstractJsonRestEstructura {
 			return valor;
 	}
 	
-	public static void main(String[] args) {
-		String a="addres[1]";
-		System.out.println(a.substring(0, a.length()-3));
-	}
+
 	
 	protected void borrarKey(String cabecera){
 		try{
@@ -171,15 +168,35 @@ public abstract class AbstractJsonRestEstructura {
 		return insertarFecha(valor);
 	}
 	
+	public String remplazarTildes(String cabecera,String valor) {
+		if(!RecuperadorPropierdadesJson.getInstancia().isReemplazarCarEspanol(cabecera))
+			return valor;
+	    String original = "áàäéèëíìïóòöúùuñÁÀÄÉÈËÍÌÏÓÒÖÚÙÜÑçÇ";
+	    String ascii = "aaaeeeiiiooouuunAAAEEEIIIOOOUUUNcC";
+	    String output = valor;
+	    for (int i=0; i<original.length(); i++) {
+	        output = output.replace(original.charAt(i), ascii.charAt(i));
+	    }
+	    return output;
+	    
+	}
+
 	protected String procesarCadena(String cabecera, String valor){
+		valor=borrarCaracteresNoNumericos(cabecera,valor);
+		valor=remplazarTildes(cabecera,valor);
 		if(valor==null || valor.length()==0)
 			return null;
 		return valor;
 	}
 	
-	protected Integer procesarEntero(String cabecera, String valor){
+	protected String borrarCaracteresNoNumericos(String cabecera, String valor){
 		if(RecuperadorPropierdadesJson.getInstancia().isBorrarCarNoNumericos(cabecera))
 			valor=valor.replaceAll("[^0-9]", "");
+		return valor;		
+	}
+	
+	protected Integer procesarEntero(String cabecera, String valor){
+		valor=borrarCaracteresNoNumericos(cabecera,valor);
 		if(valor==null || valor.length()==0)
 			return null;
 		return Integer.parseInt(valor);
@@ -199,8 +216,7 @@ public abstract class AbstractJsonRestEstructura {
 	public JSONObject getJsonFormato() {
 		return jsonFormato;
 	}
-	
-	
+
 	
 	
 }

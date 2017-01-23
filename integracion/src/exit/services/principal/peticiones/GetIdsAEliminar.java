@@ -40,7 +40,6 @@ public class GetIdsAEliminar extends GetAbstractoGenerico{
 		JSONObject jsonObject = ConvertidorJson.convertir(in);
 		JSONArray jsonArrayItems= (JSONArray) jsonObject.get(("items"));
 		EliminarGenerico e= new EliminarGenerico();
-		System.out.println(jsonArrayItems.size());
 		Integer resultado=jsonArrayItems.size();
 		ExecutorService workers = Executors.newFixedThreadPool(RecuperadorPropiedadedConfiguracionEntidad.getInstance().getNivelParalelismo());      	
 	    List<Callable<Void>> tasks = new ArrayList<>();
@@ -71,6 +70,7 @@ public class GetIdsAEliminar extends GetAbstractoGenerico{
         while ((inputLine = in.readLine()) != null) {
          	out.println(inputLine);
         }
+        out.println(ConstantesGenerales.SEPARADOR_ERROR_JSON);
         CSVHandler csvHandler = new CSVHandler();
         csvHandler.escribirCSV("error_recuperacion_servidor_codigo_"+responseCode+".csv", "No se pudo recuerar informacion de la entidad: "+ApuntadorDeEntidad.getInstance().getEntidadActual(),false);            
         out.println(ConstantesGenerales.SEPARADOR_ERROR_PETICION);

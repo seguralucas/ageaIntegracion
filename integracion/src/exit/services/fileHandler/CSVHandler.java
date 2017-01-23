@@ -22,6 +22,7 @@ public class CSVHandler {
 	public static final String PATH_ERROR_EXCEPTION_LOG="exception_ejecucion_log.txt";
 	public static final String NRO_SAC_REPETIDO_EN_EL_CSV_EJECUTADO="nro_sac_repetido_en_el_csv_ejecutado.csv";
 	public static final String PATH_INSERTADOS_OK="insertadosOK.csv";
+	public static final String PATH_UPDATES_OK="actualizadosOK.csv";
 	public static final String PATH_BORRADOS_OK="borradosOK.csv";
 	
 

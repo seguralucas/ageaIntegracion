@@ -10,18 +10,22 @@ import exit.services.fileHandler.CSVHandler;
 import exit.services.singletons.ApuntadorDeEntidad;
 import exit.services.singletons.RecuperadorPropiedadedConfiguracionEntidad;
 
-public abstract class GetAbstractoGenerico {
-	public static int x=0;
+public abstract class GetAbstractoGenerico {	
 	public Object realizarPeticion(){
-		return realizarPeticion(null);
+		return realizarPeticion(RecuperadorPropiedadedConfiguracionEntidad.getInstance().getUrl(),null);
 	}
-	 public Object realizarPeticion(Long id){
+	
+	public Object realizarPeticionString(String url){
+		return realizarPeticion(url,null);
+	}
+	
+	 public Object realizarPeticion(String url,Long id){
 	        try{
 	        	WSConector ws;
 	        	if(id!=null)
-	        		 ws = new WSConector("GET",RecuperadorPropiedadedConfiguracionEntidad.getInstance().getUrl()+"/"+id,"application/json");
+	        		 ws = new WSConector("GET",url+"/"+id);
 	        	else
-	        		 ws = new WSConector("GET",RecuperadorPropiedadedConfiguracionEntidad.getInstance().getUrl(),"application/json");
+	        		 ws = new WSConector("GET",url);
 	        	HttpURLConnection conn=ws.getConexion();
 	            int responseCode = conn.getResponseCode();
 	            BufferedReader in;
@@ -43,7 +47,7 @@ public abstract class GetAbstractoGenerico {
 	            	else
 	            		o=procesarPeticionError(in,responseCode);
 	            }
-	            return o==null?in:o;	 
+	            return o;	 
 	            }	                
           catch (ConnectException e) {
 				CSVHandler csv= new CSVHandler();

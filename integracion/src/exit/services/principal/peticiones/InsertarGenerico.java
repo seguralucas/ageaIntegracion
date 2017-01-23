@@ -42,6 +42,7 @@ public class InsertarGenerico extends InsertarAbstractoEntidades{
         while ((inputLine = in.readLine()) != null) {
          	out.println(inputLine);
         }
+        out.println(ConstantesGenerales.SEPARADOR_ERROR_JSON);
         CSVHandler csvHandler = new CSVHandler();
         csvHandler.escribirCSV("error_insercion_servidor_codigo_"+responseCode+".csv",json);            
         out.println(ConstantesGenerales.SEPARADOR_ERROR_PETICION);

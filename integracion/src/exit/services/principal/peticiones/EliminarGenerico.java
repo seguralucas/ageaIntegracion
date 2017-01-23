@@ -30,6 +30,7 @@ public class EliminarGenerico extends EliminarAbstractoEntidad {
         while ((inputLine = in.readLine()) != null) {
          	out.println(inputLine);
         }
+        out.println(ConstantesGenerales.SEPARADOR_ERROR_JSON);
         CSVHandler csvHandler = new CSVHandler();
         csvHandler.escribirCSV("error_borrado_servidor_codigo_"+responseCode+".csv", "No se pudo borrar id: "+id,false);            
         out.println(ConstantesGenerales.SEPARADOR_ERROR_PETICION);

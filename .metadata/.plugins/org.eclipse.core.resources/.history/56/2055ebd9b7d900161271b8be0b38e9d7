@@ -1,9 +1,0 @@
-package exit.services.principal.peticiones;
-
-import org.json.simple.JSONObject;
-
-public class ConvertidorResultadoHTTPAJson {
-	public static JSONObject convertir(BufferedReader in){
-		
-	}
-}

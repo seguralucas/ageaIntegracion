@@ -21,7 +21,8 @@
 "tipo":"cadena"
 },
 "MARCA_APERNET_ID":{
-"tipo":"cadena"
+"tipo":"cadena",
+"borrarCarNoNumericos":true
 },
 "PORCENTAJE":{
 "tipo":"cadena"
@@ -33,6 +34,8 @@
 "tipo":"cadena"
 },
 "SUCURSAL_APERNET_ID":{
-"tipo":"cadena"
+"tipo":"cadena",
+"borrarCarNoNumericos":true
+
 }
 }

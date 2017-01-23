@@ -10,10 +10,15 @@ import exit.services.fileHandler.CSVHandler;
 import exit.services.singletons.RecuperadorPropiedadedConfiguracionEntidad;
 
 public abstract class EliminarAbstractoEntidad{
-	public static int x=0;
+	
+	public Object realizarPeticion(){
+		return realizarPeticion(RecuperadorPropiedadedConfiguracionEntidad.getInstance().getUrl(),null);
+	}
+	
 	public Object realizarPeticion(Long id){
 		return realizarPeticion(RecuperadorPropiedadedConfiguracionEntidad.getInstance().getUrl(),id);
 	}
+	 
 	 public Object realizarPeticion(String url,Long id){
 	        try{
 	        	WSConector ws = new WSConector("DELETE",url+"/"+id,"application/json");

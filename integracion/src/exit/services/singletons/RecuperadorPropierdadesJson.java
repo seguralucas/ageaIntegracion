@@ -20,6 +20,7 @@ public class RecuperadorPropierdadesJson {
 	public static final String PROPIEDAD_TIPO="tipo";
 	public static final String PROPIEDAD_BORRAR_SI_ES_NULL="borrarSiEsNull";
 	public static final String PROPIEDAD_BORRAR_CAR_NO_NUMERICOS="borrarCarNoNumericos";
+	public static final String PROPIEDAD_REEMPLAZAR_CAR_ESPANOL="reemplazarCarEspanol";
 	public static final String TIPO_FECHA="fecha";
 	public static final String TIPO_ENTERO="entero";
 	public static final String TIPO_CADENA="cadena";
@@ -75,6 +76,12 @@ public class RecuperadorPropierdadesJson {
 	}
 	
 	public boolean isBorrarCarNoNumericos(String key){
+		JSONObject j= RecuperadorPropierdadesJson.getInstancia().getPropiedades(key);
+		Object aux=j==null?null:j.get(PROPIEDAD_BORRAR_CAR_NO_NUMERICOS);
+		return aux==null?false:(Boolean)j.get(PROPIEDAD_BORRAR_CAR_NO_NUMERICOS);
+	}
+	
+	public boolean isReemplazarCarEspanol(String key){
 		JSONObject j= RecuperadorPropierdadesJson.getInstancia().getPropiedades(key);
 		Object aux=j==null?null:j.get(PROPIEDAD_BORRAR_CAR_NO_NUMERICOS);
 		return aux==null?false:(Boolean)j.get(PROPIEDAD_BORRAR_CAR_NO_NUMERICOS);

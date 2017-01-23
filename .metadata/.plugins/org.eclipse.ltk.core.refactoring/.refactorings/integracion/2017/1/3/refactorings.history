@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename type &apos;exit.services.principal.peticiones.UpdateGenericoRightNow&apos; to &apos;UpdateAbstractoRightNow&apos;&#x0D;&#x0A;- Original project: &apos;integracion&apos;&#x0D;&#x0A;- Original element: &apos;exit.services.principal.peticiones.UpdateGenericoRightNow&apos;&#x0D;&#x0A;- Renamed element: &apos;exit.services.principal.peticiones.UpdateAbstractoRightNow&apos;&#x0D;&#x0A;- Update references to refactored element&#x0D;&#x0A;- Update textual occurrences in comments and strings" description="Rename type &apos;UpdateGenericoRightNow&apos;" flags="589830" id="org.eclipse.jdt.ui.rename.type" input="/src&lt;exit.services.principal.peticiones{UpdateGenericoRightNow.java[UpdateGenericoRightNow" matchStrategy="1" name="UpdateAbstractoRightNow" qualified="false" references="true" similarDeclarations="false" stamp="1485022023908" textual="false" version="1.0"/>
+</session>

@@ -22,7 +22,7 @@ public class WSConector {
 	 }
 	 
 	 public WSConector(String method,String url) throws Exception{
-		 	this(url,method,null);
+		 	this(method,url,null);
 	 }
 	 
 	 public WSConector(String method) throws Exception{
@@ -40,7 +40,7 @@ public class WSConector {
 		if(method.equalsIgnoreCase("POST")){
 				conn.setRequestMethod("POST");
 		}
-		else if(method.equalsIgnoreCase("UPDATE")){
+		else if(method.equalsIgnoreCase("UPDATERIGHTNOW")){
 			conn.setRequestMethod("POST");
 			conn.setRequestProperty("X-HTTP-Method-Override", "PATCH");
 		}

@@ -1,7 +1,0 @@
-package exit.services.json;
-
-public class JsonSucursales extends JsonGenerico{
-
-	@Override
-	
-}

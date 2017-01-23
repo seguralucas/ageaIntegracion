@@ -1,7 +1,0 @@
-package exit.services.parser;
-
-public class Snippet {
-	CSVHandler csv= new CSVHandler();
-	csv.escribirCSV("test.txt", "aaa");
-}
-
