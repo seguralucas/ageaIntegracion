@@ -20,7 +20,7 @@ public class PreEjecutor {
 			else
 				cantidad=-777;
 		}
-		System.out.println("Borrando finalizado.");
+		System.out.println("Borrado finalizado.");
 	}
 	
 

@@ -1,0 +1,29 @@
+FileName: Yylex.java Metodo: yylexClase org.json.simple.parser.Yylex Linea 610
+FileName: JSONParser.java Metodo: nextTokenClase org.json.simple.parser.JSONParser Linea 269
+FileName: JSONParser.java Metodo: parseClase org.json.simple.parser.JSONParser Linea 118
+FileName: JSONParser.java Metodo: parseClase org.json.simple.parser.JSONParser Linea 81
+FileName: JSONParser.java Metodo: parseClase org.json.simple.parser.JSONParser Linea 75
+FileName: RecuperadorPropierdadesJson.java Metodo: <init>Clase exit.services.singletons.RecuperadorPropierdadesJson Linea 52
+FileName: RecuperadorPropierdadesJson.java Metodo: getInstanciaClase exit.services.singletons.RecuperadorPropierdadesJson Linea 29
+FileName: ApuntadorDeEntidad.java Metodo: siguienteEntidadClase exit.services.singletons.ApuntadorDeEntidad Linea 35
+FileName: Principal.java Metodo: mainClase exit.services.principal.Principal Linea 27
+---------------------------------------------------------------------
+FileName: Yylex.java Metodo: yylexClase org.json.simple.parser.Yylex Linea 610
+FileName: JSONParser.java Metodo: nextTokenClase org.json.simple.parser.JSONParser Linea 269
+FileName: JSONParser.java Metodo: parseClase org.json.simple.parser.JSONParser Linea 118
+FileName: JSONParser.java Metodo: parseClase org.json.simple.parser.JSONParser Linea 81
+FileName: JSONParser.java Metodo: parseClase org.json.simple.parser.JSONParser Linea 75
+FileName: RecuperadorPropierdadesJson.java Metodo: <init>Clase exit.services.singletons.RecuperadorPropierdadesJson Linea 52
+FileName: RecuperadorPropierdadesJson.java Metodo: getInstanciaClase exit.services.singletons.RecuperadorPropierdadesJson Linea 29
+FileName: JsonGenerico.java Metodo: alterarValorClase exit.services.json.JsonGenerico Linea 24
+FileName: AbstractJsonRestEstructura.java Metodo: insertarValorJsonClase exit.services.json.AbstractJsonRestEstructura Linea 45
+FileName: JsonGenerico.java Metodo: agregarCampoClase exit.services.json.JsonGenerico Linea 34
+FileName: ConvertidosJSONCSV.java Metodo: crearJsonClase exit.services.fileHandler.ConvertidosJSONCSV Linea 72
+FileName: ConvertidosJSONCSV.java Metodo: convertirCSVaJSONLineaALineaIncidentesClase exit.services.fileHandler.ConvertidosJSONCSV Linea 47
+FileName: ParalelizadorDistintosFicheros.java Metodo: callClase exit.services.principal.ejecutores.ParalelizadorDistintosFicheros$1 Linea 50
+FileName: ParalelizadorDistintosFicheros.java Metodo: callClase exit.services.principal.ejecutores.ParalelizadorDistintosFicheros$1 Linea 1
+FileName: null Metodo: runClase java.util.concurrent.FutureTask Linea -1
+FileName: null Metodo: runWorkerClase java.util.concurrent.ThreadPoolExecutor Linea -1
+FileName: null Metodo: runClase java.util.concurrent.ThreadPoolExecutor$Worker Linea -1
+FileName: null Metodo: runClase java.lang.Thread Linea -1
+---------------------------------------------------------------------

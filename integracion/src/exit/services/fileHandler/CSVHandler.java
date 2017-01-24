@@ -18,6 +18,8 @@ public class CSVHandler {
 	public static final String PATH_SAC_EXISTENTE="sac_existente_services.csv";
 	public static final String LOG_ERROR_FETCH_TIPO_INCIDENTE="error_fetch_tipo_incidente.txt";
 	public static final String PATH_ERROR_EXCEPTION="exception_ejecucion.csv";
+	public static final String PATH_ERROR_VALIADACION_DATOS_CSV="error_validacion_datos.csv";
+	public static final String PATH_ERROR_VALIADACION_DATOS_TXT="error_validacion_datos.txt";
 	public static final String PATH_ID_NO_ENCONTRADO="id_no_encontrado.csv";
 	public static final String PATH_ERROR_EXCEPTION_LOG="exception_ejecucion_log.txt";
 	public static final String NRO_SAC_REPETIDO_EN_EL_CSV_EJECUTADO="nro_sac_repetido_en_el_csv_ejecutado.csv";
@@ -78,6 +80,18 @@ public class CSVHandler {
 /*		 private void insertarCampoVacio(CsvWriter csvOutput) throws IOException{
         	 csvOutput.write(insertarNoNull(""));
 		 }*/
+		 
+		 public void escribirCSVErrorValidacion(String line, String error){
+				try {
+					this.escribirCSV(PATH_ERROR_VALIADACION_DATOS_CSV,line);
+					this.escribirCSV(PATH_ERROR_VALIADACION_DATOS_TXT, line);
+					this.escribirCSV(PATH_ERROR_VALIADACION_DATOS_TXT, error);
+					this.escribirCSV(PATH_ERROR_VALIADACION_DATOS_TXT, ConstantesGenerales.SEPARADOR_ERROR_PETICION);					
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+
+		 }
 		 
 		 private String insertarNoNull(String cadena){
 			 if(cadena!=null)

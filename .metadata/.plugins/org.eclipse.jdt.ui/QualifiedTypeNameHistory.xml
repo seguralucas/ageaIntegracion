@@ -19,7 +19,6 @@
 <fullyQualifiedTypeName name="java.util.HashMap"/>
 <fullyQualifiedTypeName name="exit.services.principal.peticiones.ConvertidorResultadoHTTPAJson"/>
 <fullyQualifiedTypeName name="exit.services.principal.peticiones.ConvertidorJson"/>
-<fullyQualifiedTypeName name="exit.services.singletons.ApuntadorDeEntidad"/>
 <fullyQualifiedTypeName name="javax.swing.tree.VariableHeightLayoutCache"/>
 <fullyQualifiedTypeName name="exit.services.singletons.RecuperadorFormato"/>
 <fullyQualifiedTypeName name="exit.services.procesadorJson.IProcesadorJson"/>
@@ -27,11 +26,15 @@
 <fullyQualifiedTypeName name="exit.services.procesadorJson.JsonProcesarReemplazo"/>
 <fullyQualifiedTypeName name="java.lang.Object"/>
 <fullyQualifiedTypeName name="java.lang.Integer"/>
-<fullyQualifiedTypeName name="exit.services.fileHandler.CSVHandler"/>
 <fullyQualifiedTypeName name="java.lang.Exception"/>
-<fullyQualifiedTypeName name="exit.services.fileHandler.ConstantesGenerales"/>
-<fullyQualifiedTypeName name="org.json.simple.JSONObject"/>
-<fullyQualifiedTypeName name="exit.services.singletons.RecuperadorPropierdadesJson"/>
 <fullyQualifiedTypeName name="exit.services.singletons.RecuperadorPropiedadedConfiguracionEntidad"/>
+<fullyQualifiedTypeName name="java.text.Normalizer"/>
+<fullyQualifiedTypeName name="java.util.regex.Pattern"/>
+<fullyQualifiedTypeName name="exit.services.singletons.ApuntadorDeEntidad"/>
+<fullyQualifiedTypeName name="org.json.simple.JSONObject"/>
+<fullyQualifiedTypeName name="java.util.Map"/>
+<fullyQualifiedTypeName name="exit.services.fileHandler.CSVHandler"/>
+<fullyQualifiedTypeName name="exit.services.fileHandler.ConstantesGenerales"/>
 <fullyQualifiedTypeName name="org.json.simple.JSONArray"/>
+<fullyQualifiedTypeName name="exit.services.singletons.RecuperadorPropierdadesJson"/>
 </qualifiedTypeNameHistroy>

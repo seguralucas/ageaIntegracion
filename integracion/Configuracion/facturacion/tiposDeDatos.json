@@ -1,6 +1,8 @@
 {
 "BP_SAP_ID":{
-"tipo":"cadena"
+"tipo":"cadena",
+"completar10Ceros":true
+
 },
 "CAMPANA":{
 "tipo":"cadena"

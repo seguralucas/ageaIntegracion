@@ -6,6 +6,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
 
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -21,6 +22,12 @@ public class RecuperadorPropierdadesJson {
 	public static final String PROPIEDAD_BORRAR_SI_ES_NULL="borrarSiEsNull";
 	public static final String PROPIEDAD_BORRAR_CAR_NO_NUMERICOS="borrarCarNoNumericos";
 	public static final String PROPIEDAD_REEMPLAZAR_CAR_ESPANOL="reemplazarCarEspanol";
+	public static final String PROPIEDAD_COMPLETAR10CEROS="completar10Ceros";
+
+	public static final String PROPIEDAD_VALORES_PERMITIDOS="valoresPermitidos";
+	public static final String PROPIEDAD_VALORES_PERMITIDOS_LISTA="lista";
+	public static final String PROPIEDAD_VALORES_PERMITIDOS_CASE_SENSITIVE="caseSensitive";
+	
 	public static final String TIPO_FECHA="fecha";
 	public static final String TIPO_ENTERO="entero";
 	public static final String TIPO_CADENA="cadena";
@@ -83,15 +90,43 @@ public class RecuperadorPropierdadesJson {
 	
 	public boolean isReemplazarCarEspanol(String key){
 		JSONObject j= RecuperadorPropierdadesJson.getInstancia().getPropiedades(key);
-		Object aux=j==null?null:j.get(PROPIEDAD_BORRAR_CAR_NO_NUMERICOS);
-		return aux==null?false:(Boolean)j.get(PROPIEDAD_BORRAR_CAR_NO_NUMERICOS);
+		Object aux=j==null?null:j.get(PROPIEDAD_REEMPLAZAR_CAR_ESPANOL);
+		return aux==null?false:(Boolean)j.get(PROPIEDAD_REEMPLAZAR_CAR_ESPANOL);
 	}
+	
+	public boolean isCompletar10Ceros(String key){
+		JSONObject j= RecuperadorPropierdadesJson.getInstancia().getPropiedades(key);
+		Object aux=j==null?null:j.get(PROPIEDAD_COMPLETAR10CEROS);
+		return aux==null?false:(Boolean)j.get(PROPIEDAD_COMPLETAR10CEROS);
+	}
+	
 	
 	public String getBorrarSiEsNull(String key){
 		JSONObject j= RecuperadorPropierdadesJson.getInstancia().getPropiedades(key);
 		String aux=j==null?null:(String)j.get(PROPIEDAD_BORRAR_SI_ES_NULL);
 		return aux;
-		}
+	}
+	
+	public JSONObject getValoresPermitidos(String key){
+		JSONObject j= RecuperadorPropierdadesJson.getInstancia().getPropiedades(key);
+		JSONObject aux=j==null?null:(JSONObject)j.get(PROPIEDAD_VALORES_PERMITIDOS);
+		return aux;
+	}
+		
+	public JSONArray getValoresPermitidosLista(String key){
+		JSONObject json= this.getValoresPermitidos(key);
+		if(json==null)
+			return null;
+		return (JSONArray)json.get(PROPIEDAD_VALORES_PERMITIDOS_LISTA);
+	}
+	
+	public boolean isValoresPermitidosCaseSensitive(String key){
+		JSONObject json= this.getValoresPermitidos(key);
+		if(json==null)
+			return false;
+		Boolean isCaseSensitive=(Boolean)json.get(PROPIEDAD_VALORES_PERMITIDOS_CASE_SENSITIVE);
+		return isCaseSensitive==null?false:isCaseSensitive;
+	}
 	
 	public boolean isBorrarSiEsNull(String key){
 		JSONObject j= RecuperadorPropierdadesJson.getInstancia().getPropiedades(key);

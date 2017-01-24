@@ -38,7 +38,6 @@ public class ParalelizadorDistintosFicheros {
 			}
 			ArrayList<File> filesCSVDivididos=FilesAProcesarManager.getInstance().getAllCSV(DirectorioManager.getPathFechaYHoraInicioDivision());
 	    	ExecutorService workers = Executors.newFixedThreadPool(RecuperadorPropiedadedConfiguracionEntidad.getInstance().getNivelParalelismo());      	
-
 		    List<Callable<Void>> tasks = new ArrayList<>();
 			for(File file: filesCSVDivididos){
 				tasks.add(new Callable<Void>() {

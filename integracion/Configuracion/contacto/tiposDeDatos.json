@@ -3,7 +3,8 @@
 "tipo":"entero"
 },
 "BP_SAP_ID":{
-"tipo":"cadena"
+"tipo":"cadena",
+"completar10Ceros":true
 },
 "BP_WCC_ID":{
 "tipo":"cadena"

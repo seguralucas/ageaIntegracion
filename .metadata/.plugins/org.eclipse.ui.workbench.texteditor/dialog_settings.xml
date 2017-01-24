@@ -2,20 +2,20 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="&quot;id&quot;:0" key="selection"/>
+		<item value="String" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
+			<item value="string"/>
+			<item value="BP_SAP_ID"/>
+			<item value="validar"/>
+			<item value="main"/>
+			<item value="BENEFICIO_CATEGORIA"/>
 			<item value="&quot;id&quot;:0"/>
 			<item value="&quot;id&quot;:1"/>
 			<item value="phone"/>
-			<item value="GRUPO_DE_CLIENTE"/>
-			<item value="ejecutorGenerico"/>
-			<item value="MARCA"/>
-			<item value="RUBRO"/>
-			<item value="campa"/>
 		</list>
 		<list key="replacehistory">
 		</list>

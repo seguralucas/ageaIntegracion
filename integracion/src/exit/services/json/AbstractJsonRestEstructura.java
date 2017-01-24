@@ -10,6 +10,7 @@ import exit.services.fileHandler.CSVHandler;
 import exit.services.fileHandler.ConstantesGenerales;
 import exit.services.procesadorJson.IProcesadorJson;
 import exit.services.procesadorJson.JsonProcesarReemplazo;
+import exit.services.singletons.ApuntadorDeEntidad;
 import exit.services.singletons.RecuperadorFormato;
 import exit.services.singletons.RecuperadorPropierdadesJson;
 
@@ -180,8 +181,18 @@ public abstract class AbstractJsonRestEstructura {
 	    return output;
 	    
 	}
+	
+	
+	public String agregar10Ceros(String cabecera,String valor) {
+		if(!RecuperadorPropierdadesJson.getInstancia().isCompletar10Ceros(cabecera))
+			return valor;
+		for(int i=valor.length();i<10;i++)
+			valor="0"+valor;
+		return valor;
+	}
 
 	protected String procesarCadena(String cabecera, String valor){
+		valor=agregar10Ceros(cabecera,valor);
 		valor=borrarCaracteresNoNumericos(cabecera,valor);
 		valor=remplazarTildes(cabecera,valor);
 		if(valor==null || valor.length()==0)
@@ -217,6 +228,15 @@ public abstract class AbstractJsonRestEstructura {
 		return jsonFormato;
 	}
 
+	public static void main(String[] args) {
+		ApuntadorDeEntidad.getInstance().siguienteEntidad();
+		Class c= String.class;
+		Object o="ttt";
+		String a=(String) c.cast(o);
+		System.out.println(a);
+		System.out.println(RecuperadorPropierdadesJson.getInstancia().isValoresPermitidosCaseSensitive("BENEFICIO_CATEGORIA"));
+		System.out.println(RecuperadorPropierdadesJson.getInstancia().isValoresPermitidosCaseSensitive("BENEFICIO_ESTADO"));
+	}
 	
 	
 }
