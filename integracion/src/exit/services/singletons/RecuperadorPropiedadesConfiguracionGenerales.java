@@ -106,6 +106,11 @@ public class RecuperadorPropiedadesConfiguracionGenerales {
 		return getValueMap("identificadorAtributo");
 	}
 	
+	public boolean isBorrarDataSetAlFinalizar() {
+		String borrarDataSetAlFinalizar=getValueMap("borrarDataSetAlFinalizar");
+		return borrarDataSetAlFinalizar==null?false:borrarDataSetAlFinalizar.equalsIgnoreCase("true");
+	}
+	
 	public static void main(String[] args) {
 		getInstance().mostrarConfiguracion();
 	}

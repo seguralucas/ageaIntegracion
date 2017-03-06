@@ -1,9 +1,11 @@
 package exit.services.principal;
 
 
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.management.ManagementFactory;
+import java.nio.file.Path;
 
 import org.json.simple.parser.ParseException;
 
@@ -31,6 +33,10 @@ public class Principal {
 	      		if(RecuperadorPropiedadedConfiguracionEntidad.getInstance().getMetodoPreEjecutor()!=null)
 	      			PreEjecutor.ejecutar(RecuperadorPropiedadedConfiguracionEntidad.getInstance().getMetodoPreEjecutor(), RecuperadorPropiedadedConfiguracionEntidad.getInstance().getParametroPreEjecutor());
 	      		hiloApartre.insertar();
+	      		if(RecuperadorPropiedadedConfiguracionEntidad.getInstance().isBorrarDataSetAlFinalizar()){
+	      			File file = new File(RecuperadorPropiedadedConfiguracionEntidad.getInstance().getPathCSVRegistros());
+	      			file.delete();
+	      		}
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

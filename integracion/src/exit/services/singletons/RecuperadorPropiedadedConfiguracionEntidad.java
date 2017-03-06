@@ -144,6 +144,13 @@ public class RecuperadorPropiedadedConfiguracionEntidad {
 		return getValueMap("identificadorAtributo");
 	}
 	
+	public boolean isBorrarDataSetAlFinalizar() {
+		String borrarDataSetAlFinalizar=getValueMap("borrarDataSetAlFinalizar");
+		if(borrarDataSetAlFinalizar==null)
+			return RecuperadorPropiedadesConfiguracionGenerales.getInstance().isBorrarDataSetAlFinalizar();
+		return borrarDataSetAlFinalizar.equalsIgnoreCase("true");
+	}
+	
 	public static void main(String[] args) throws IOException {
 	while(ApuntadorDeEntidad.getInstance().siguienteEntidad()){
 		CSVHandler csv= new CSVHandler();
