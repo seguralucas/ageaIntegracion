@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy 3 elements to &apos;whirpool&apos;&#x0D;&#x0A;- Original project: &apos;integracion&apos;&#x0D;&#x0A;- Destination element: &apos;whirpool&apos;&#x0D;&#x0A;- Original elements:&#x0D;&#x0A;     tiposDeDatos.json&#x0D;&#x0A;     ConfiguracionEntidad.properties&#x0D;&#x0A;     formatoJson.json" description="Copy files" element1="Configuracion/sucursales/tiposDeDatos.json" element2="Configuracion/sucursales/ConfiguracionEntidad.properties" element3="Configuracion/sucursales/formatoJson.json" files="3" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1489766725406" target="/integracion/Configuracion/whirpool" units="0" version="1.0"/>
+</session>

@@ -1,0 +1,17 @@
+package Ejecutar;
+
+import java.io.IOException;
+
+public class Ejecutar {
+	
+	public static void main(String[] args) throws IOException, InterruptedException {
+		while(true){
+			Runtime rt = Runtime.getRuntime();
+			Process pr = rt.exec("java -jar integracion.jar");
+			Thread.sleep(30 *   // minutes to sleep
+		             60 *   // seconds to a minute
+		             1000); // milliseconds to a second
+		}
+	}
+
+}

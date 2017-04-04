@@ -13,6 +13,7 @@ import exit.services.fileHandler.DirectorioManager;
 import exit.services.principal.ejecutores.ParalelizadorDistintosFicheros;
 import exit.services.singletons.ApuntadorDeEntidad;
 import exit.services.singletons.RecuperadorPropiedadedConfiguracionEntidad;
+import exit.services.singletons.RecuperadorPropiedadesConfiguracionGenerales;
 
 public class Principal {
 	public static final String UPDATE_CONTACTOS="UPDATE_CONTACTOS";
@@ -22,33 +23,35 @@ public class Principal {
 	
 
 	
+
 	
-	public static void main(String[] args) throws IOException, ParseException {
-   		long time_start, time_end;
-    	time_start = System.currentTimeMillis();
-    	while(ApuntadorDeEntidad.getInstance().siguienteEntidad()){
-	    	RecuperadorPropiedadedConfiguracionEntidad.getInstance().mostrarConfiguracion();
-    		ParalelizadorDistintosFicheros hiloApartre = new ParalelizadorDistintosFicheros();
-	      	try {
-	      		if(RecuperadorPropiedadedConfiguracionEntidad.getInstance().getMetodoPreEjecutor()!=null)
-	      			PreEjecutor.ejecutar(RecuperadorPropiedadedConfiguracionEntidad.getInstance().getMetodoPreEjecutor(), RecuperadorPropiedadedConfiguracionEntidad.getInstance().getParametroPreEjecutor());
-	      		hiloApartre.insertar();
-	      		if(RecuperadorPropiedadedConfiguracionEntidad.getInstance().isBorrarDataSetAlFinalizar()){
-	      			File file = new File(RecuperadorPropiedadedConfiguracionEntidad.getInstance().getPathCSVRegistros());
-	      			file.delete();
-	      		}
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-	    }
-	    	time_end = System.currentTimeMillis();
-	    	System.out.println(ManagementFactory.getThreadMXBean().getThreadCount() );
-	    	double tiempoDemorado=(time_end - time_start)/1000/60 ;
-    		if(tiempoDemorado>1){
-        		FileWriter fw = new FileWriter(DirectorioManager.getDirectorioFechaYHoraInicio("duracion.txt"));
-    			fw.write("El proceso de updateo demoró un total de: "+tiempoDemorado+" minutos");
-        		fw.close();
-    		}    	
+	
+		public static void main(String[] args) throws IOException, ParseException {
+	   		long time_start, time_end;
+	    	time_start = System.currentTimeMillis();
+	    	while(ApuntadorDeEntidad.getInstance().siguienteEntidad()){
+		    	RecuperadorPropiedadedConfiguracionEntidad.getInstance().mostrarConfiguracion();
+	    		ParalelizadorDistintosFicheros hiloApartre = new ParalelizadorDistintosFicheros();
+		      	try {
+		      		if(RecuperadorPropiedadedConfiguracionEntidad.getInstance().getMetodoPreEjecutor()!=null)
+		      			PreEjecutor.ejecutar(RecuperadorPropiedadedConfiguracionEntidad.getInstance().getMetodoPreEjecutor(), RecuperadorPropiedadedConfiguracionEntidad.getInstance().getParametroPreEjecutor());
+		      		hiloApartre.insertar();
+		      		if(RecuperadorPropiedadedConfiguracionEntidad.getInstance().isBorrarDataSetAlFinalizar()){
+		      			File file = new File(RecuperadorPropiedadedConfiguracionEntidad.getInstance().getPathCSVRegistros());
+		      			file.delete();
+		      		}
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+		    }
+		    	time_end = System.currentTimeMillis();
+		    	System.out.println(ManagementFactory.getThreadMXBean().getThreadCount() );
+		    	double tiempoDemorado=(time_end - time_start)/1000/60 ;
+	    		if(tiempoDemorado>1){
+	        		FileWriter fw = new FileWriter(DirectorioManager.getDirectorioFechaYHoraInicio("duracion.txt"));
+	    			fw.write("El proceso de updateo demoró un total de: "+tiempoDemorado+" minutos");
+	        		fw.close();
+	    		}    	
 /***********************************************************/
 		//***Borrar ficheros de ejecucion***/
 /***********************************************************/

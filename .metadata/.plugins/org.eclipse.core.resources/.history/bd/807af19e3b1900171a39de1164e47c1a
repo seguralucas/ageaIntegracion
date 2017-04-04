@@ -1,0 +1,22 @@
+package Ejecutar;
+
+import java.io.IOException;
+
+import exit.services.singletons.RecuperadorPropiedadesConfiguracionGenerales;
+
+public class Ejecutar {
+	
+	public static void main(String[] args) throws IOException, InterruptedException {
+		while(true){
+			Runtime rt = Runtime.getRuntime();
+			Process pr = rt.exec("java -jar integracion.jar");
+			Integer time=RecuperadorPropiedadesConfiguracionGenerales.getInstance().getIntervaloDeEjecucion();
+			if(time==null)
+				return;
+			Thread.sleep(time *   // minutes to sleep
+		             60 *   // seconds to a minute
+		             1000); // milliseconds to a second
+		}
+	}
+
+}

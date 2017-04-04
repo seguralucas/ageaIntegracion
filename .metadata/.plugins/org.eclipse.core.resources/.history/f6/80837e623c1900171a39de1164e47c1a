@@ -1,0 +1,13 @@
+package Ejecutar;
+
+import java.io.IOException;
+
+import exit.services.singletons.RecuperadorPropiedadesConfiguracionGenerales;
+
+public class Ejecutar {
+	
+	public static void main(String[] args) throws IOException, InterruptedException {
+		System.out.println("ss");
+	}
+
+}
