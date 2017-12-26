@@ -1,0 +1,22 @@
+{
+"SAP ID":{
+"tipo":"cadena",
+"completar10Ceros":true
+},
+"CAMPANA":{
+"tipo":"cadena"
+},
+"ESTADO_SUSC_DET":{
+"tipo":"cadena"
+},
+"Grupo_Cliente":{
+"tipo":"cadena"
+},
+"Producto":{
+"tipo":"cadena"
+},
+"Promocion":{
+"tipo":"cadena"
+}
+
+}

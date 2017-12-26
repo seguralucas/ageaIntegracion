@@ -13,6 +13,8 @@ import exit.services.fileHandler.DirectorioManager;
 public class RecuperadorPropiedadedConfiguracionEntidad {
 	HashMap<String, String> mapPropiedades;
 	private static RecuperadorPropiedadedConfiguracionEntidad instance;
+	public static final String SEPARADOR_NORMAL="separadorNormal";
+	public static final String SEPARADOR_CAMPANA="separadorCampana";
     private RecuperadorPropiedadedConfiguracionEntidad(){
     	mapPropiedades=new HashMap<String,String>();
         Properties props = new Properties();
@@ -143,6 +145,16 @@ public class RecuperadorPropiedadedConfiguracionEntidad {
 			return RecuperadorPropiedadesConfiguracionGenerales.getInstance().getIdentificadorAtributo();
 		return getValueMap("identificadorAtributo");
 	}
+	
+	public String getSeparadorArchivos() {
+		if(getValueMap("separadorArchivos")==null)
+			return SEPARADOR_NORMAL;
+		if(getValueMap("separadorArchivos").equalsIgnoreCase(SEPARADOR_CAMPANA))
+			return SEPARADOR_CAMPANA;
+		return SEPARADOR_NORMAL;
+	}
+	
+	
 	
 	public boolean isBorrarDataSetAlFinalizar() {
 		String borrarDataSetAlFinalizar=getValueMap("borrarDataSetAlFinalizar");

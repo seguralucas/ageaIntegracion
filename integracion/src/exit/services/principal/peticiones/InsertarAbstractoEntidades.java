@@ -42,6 +42,7 @@ public abstract class InsertarAbstractoEntidades {
 	            return o==null?in:o;	 
 	            }	                
             catch (ConnectException e) {
+            	e.printStackTrace();
 				CSVHandler csv= new CSVHandler();
 				try {
 					csv.escribirCSV(CSVHandler.PATH_ERROR_SERVER_NO_ALCANZADO, json.getLine());
@@ -51,6 +52,7 @@ public abstract class InsertarAbstractoEntidades {
 				return null;
 			}
             catch (Exception e) {
+            	e.printStackTrace();
 				CSVHandler csv= new CSVHandler();
 				csv.escribirErrorException(json,e.getStackTrace());
 				return null;

@@ -28,11 +28,19 @@ import exit.services.util.Contador;
 public class ParalelizadorDistintosFicheros {
 	public static int y=0;
 	public static int z=0;
-	public void insertar() throws InterruptedException, IOException{
+	public void insertar() throws Exception{
 	 	ArrayList<File> pathsCSVEjecutar= FilesAProcesarManager.getInstance().getCSVAProcesar(RecuperadorPropiedadedConfiguracionEntidad.getInstance().getPathCSVRegistros());
+			System.out.println("la separacion es de tipo: "+RecuperadorPropiedadedConfiguracionEntidad.getInstance().getSeparadorArchivos());
+
 	 	for(File path:pathsCSVEjecutar){
 		 	try {
-				DirectorioManager.SepararFicheros(path);
+		 		if(RecuperadorPropiedadedConfiguracionEntidad.getInstance().getSeparadorArchivos().equalsIgnoreCase(RecuperadorPropiedadedConfiguracionEntidad.SEPARADOR_CAMPANA)){
+		 			System.out.println("Se va a parelizar campana");
+		 			DirectorioManager.SepararFicherosCampana(path);
+		 		}
+		 		else{
+		 			DirectorioManager.SepararFicheros(path);
+		 		}
 			} catch (IOException e) {
 				e.printStackTrace();
 			}

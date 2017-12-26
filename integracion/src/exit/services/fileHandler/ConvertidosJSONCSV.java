@@ -34,17 +34,17 @@ public class ConvertidosJSONCSV{
   		while ((line = br.readLine()) != null) {
   			if(this.esPrimeraVez){
   				String firstChar=String.valueOf(line.charAt(0));
-  				if(!firstChar.matches("[a-zA-Z]"))
+  				if(!firstChar.matches("[a-zA-Z_-]"))
   					line=line.substring(1);//Ocasionalmente el primer caracter erra un signo raro y hay que eliminarlo.
   				this.esPrimeraVez=false;
   				CSVHandler.cabeceraFichero=line;//Esto es sólo en caso de que estemos haciendo update
   			}
   			else{
-  	    		String[] valoresCsv= line.replace("\"", "'").split(RecuperadorPropiedadedConfiguracionEntidad.getInstance().getSeparadorCSVREGEX());
+  	    		String[] valoresCsv= line.replace("\"", "'").split(RecuperadorPropiedadedConfiguracionEntidad.getInstance().getSeparadorCSVREGEX(),-1);
 				try{
-  					if(ColumnasMayorCabecera(valoresCsv))
+  					if(distintaCantidadDeColumnas(valoresCsv))
   						throw new Exception();
-  					AbstractJsonRestEstructura jsonEstructura=crearJson(valoresCsv,CSVHandler.cabeceraFichero.split(RecuperadorPropiedadedConfiguracionEntidad.getInstance().getSeparadorCSVREGEX()));  	
+  					AbstractJsonRestEstructura jsonEstructura=crearJson(valoresCsv,CSVHandler.cabeceraFichero.split(RecuperadorPropiedadedConfiguracionEntidad.getInstance().getSeparadorCSVREGEX(),-1));  	
   					jsonEstructura.setLine(line);
     			return jsonEstructura;
   				}
@@ -68,15 +68,15 @@ public class ConvertidosJSONCSV{
 			   
 	   public AbstractJsonRestEstructura crearJson(String[] valoresCsv, String[] cabeceras) throws Exception{
 		   AbstractJsonRestEstructura restEstructura= new JsonGenerico();
-		   for(int i=0;i<valoresCsv.length;i++){
+		   for(int i=0;i<cabeceras.length;i++){
 			   restEstructura.agregarCampo(cabeceras[i], valoresCsv[i]);
 		   }
 		   return restEstructura;
 	   }
 
 	   
-	   private boolean ColumnasMayorCabecera(String[] valoresCsv){
-		   return CSVHandler.cabeceraFichero.split(RecuperadorPropiedadedConfiguracionEntidad.getInstance().getSeparadorCSVREGEX()).length<valoresCsv.length;
+	   private boolean distintaCantidadDeColumnas(String[] valoresCsv){
+		   return CSVHandler.cabeceraFichero.split(RecuperadorPropiedadedConfiguracionEntidad.getInstance().getSeparadorCSVREGEX(),-1).length!=valoresCsv.length;
 	   }
 	   
 	   	   

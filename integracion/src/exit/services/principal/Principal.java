@@ -23,7 +23,10 @@ public class Principal {
 	
 
 	
-
+	private static boolean existPath(String path){
+		File f= new File(path);
+		return f.exists() && !f.isDirectory();
+	}
 	
 	
 		public static void main(String[] args) throws IOException, ParseException {
@@ -32,17 +35,19 @@ public class Principal {
 	    	while(ApuntadorDeEntidad.getInstance().siguienteEntidad()){
 		    	RecuperadorPropiedadedConfiguracionEntidad.getInstance().mostrarConfiguracion();
 	    		ParalelizadorDistintosFicheros hiloApartre = new ParalelizadorDistintosFicheros();
-		      	try {
-		      		if(RecuperadorPropiedadedConfiguracionEntidad.getInstance().getMetodoPreEjecutor()!=null)
-		      			PreEjecutor.ejecutar(RecuperadorPropiedadedConfiguracionEntidad.getInstance().getMetodoPreEjecutor(), RecuperadorPropiedadedConfiguracionEntidad.getInstance().getParametroPreEjecutor());
-		      		hiloApartre.insertar();
-		      		if(RecuperadorPropiedadedConfiguracionEntidad.getInstance().isBorrarDataSetAlFinalizar()){
-		      			File file = new File(RecuperadorPropiedadedConfiguracionEntidad.getInstance().getPathCSVRegistros());
-		      			file.delete();
-		      		}
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
+	    		if(existPath(RecuperadorPropiedadedConfiguracionEntidad.getInstance().getPathCSVRegistros())){
+			      	try {
+			      		if(RecuperadorPropiedadedConfiguracionEntidad.getInstance().getMetodoPreEjecutor()!=null)
+			      			PreEjecutor.ejecutar(RecuperadorPropiedadedConfiguracionEntidad.getInstance().getMetodoPreEjecutor(), RecuperadorPropiedadedConfiguracionEntidad.getInstance().getParametroPreEjecutor());
+			      		hiloApartre.insertar();
+			      		if(RecuperadorPropiedadedConfiguracionEntidad.getInstance().isBorrarDataSetAlFinalizar()){
+			      			File file = new File(RecuperadorPropiedadedConfiguracionEntidad.getInstance().getPathCSVRegistros());
+			      			file.delete();
+			      		}
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+	    		}
 		    }
 		    	time_end = System.currentTimeMillis();
 		    	System.out.println(ManagementFactory.getThreadMXBean().getThreadCount() );

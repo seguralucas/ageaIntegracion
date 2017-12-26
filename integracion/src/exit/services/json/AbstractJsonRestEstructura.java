@@ -98,7 +98,7 @@ public abstract class AbstractJsonRestEstructura {
 		String[] fecha=valor.split("/");
 		if(fecha.length==3){
 			try{
-				return fecha[2]+"-"+fecha[0]+"-"+fecha[1];
+				return fecha[2]+"-"+fecha[1]+"-"+fecha[0];
 			}
 			catch(Exception e){
 				try {

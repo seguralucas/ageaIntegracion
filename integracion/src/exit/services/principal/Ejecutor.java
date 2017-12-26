@@ -2,6 +2,9 @@ package exit.services.principal;
 
 import java.io.IOException;
 import java.lang.reflect.Method;
+import java.util.HashSet;
+import java.util.Hashtable;
+import java.util.concurrent.Semaphore;
 
 import exit.services.excepciones.ExceptionBiactiva;
 import exit.services.fileHandler.CSVHandler;
@@ -9,6 +12,7 @@ import exit.services.json.AbstractJsonRestEstructura;
 import exit.services.json.JSONHandler;
 import exit.services.json.JsonGenerico;
 import exit.services.principal.peticiones.GetExistFieldURLQueryRightNow;
+import exit.services.principal.peticiones.GetIdsByBpSapIdCampana;
 import exit.services.principal.peticiones.InsertarAbstractoEntidades;
 import exit.services.principal.peticiones.InsertarGenerico;
 import exit.services.principal.peticiones.UpdateGenericoRightNow;
@@ -29,7 +33,7 @@ public class Ejecutor {
 		try{
 		String separador=RecuperadorPropiedadedConfiguracionEntidad.getInstance().getIdentificadorAtributo();
 		int aux;
-		int index = parametros.indexOf(separador);
+		int index = parametros.indexOf(separador);/*Si hay algun parámetro en la url para reemplazar*/
 		while(index >= 0) {
 		   aux=index;
 		   index = parametros.indexOf(separador, index+1);
@@ -58,6 +62,17 @@ public class Ejecutor {
 		}
 	}
 	
+	private static HashSet<String> bpSapIdsBorrados= new HashSet<String>();
+	
+	private static synchronized boolean verificarBpSapIdBorrado(String id){
+		if(bpSapIdsBorrados.contains(id))
+			return false;
+		bpSapIdsBorrados.add(id);
+		return true;
+	}
+	
+	
+
 	public void ejecutorGenerico(AbstractJsonRestEstructura jsonEst){
 		JSONHandler jsonH;
 			try{

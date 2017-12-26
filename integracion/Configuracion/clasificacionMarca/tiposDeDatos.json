@@ -5,6 +5,9 @@
 "Codigo Marca":{
 "tipo":"entero"
 },
+"Cuenta (Razón Social)"{
+"tipo":"cadena"
+}
 "Tienda Online":{
 "tipo":"cadena"
 },
@@ -21,13 +24,16 @@
 "tipo":"cadena"
 },
 "Target 1":{
-"tipo":"cadena"
+"tipo":"cadena",
+"reemplazarCarEspanol":true
 },
 "Target 2":{
-"tipo":"cadena"
+"tipo":"cadena",
+"reemplazarCarEspanol":true
 },
 "Target 3":{
-"tipo":"cadena"
+"tipo":"cadena",
+"reemplazarCarEspanol":true
 },
 "Valor de cluster":{
 "tipo":"cadena"

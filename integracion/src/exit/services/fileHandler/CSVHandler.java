@@ -39,7 +39,7 @@ public class CSVHandler {
 		
 		private void escribirCampos(File file, String line) throws IOException{
 		 	CsvWriter csvOutput = new CsvWriter(new FileWriter(file, true), RecuperadorPropiedadedConfiguracionEntidad.getInstance().getSeparadorCSV().charAt(0));
-            String[] campos= line.split(RecuperadorPropiedadedConfiguracionEntidad.getInstance().getSeparadorCSVREGEX());
+            String[] campos= line.split(RecuperadorPropiedadedConfiguracionEntidad.getInstance().getSeparadorCSVREGEX(),-1);
             for(String c:campos){
                 csvOutput.write(insertarNoNull(c));        
             }
